@@ -7,8 +7,9 @@ import 'package:project/core/config/theme/app_color.dart';
 class Customcolumnchosemode extends StatelessWidget {
   final String text;
   final String picture;
+  final void Function() ontap;
   const Customcolumnchosemode(
-      {super.key, required this.text, required this.picture});
+      {super.key, required this.text, required this.picture, required this.ontap});
 
   // final String text ;
 
@@ -16,18 +17,21 @@ class Customcolumnchosemode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipOval(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xff30393C).withOpacity(0.5),
-              ),
-              child: SvgPicture.asset(
-                picture,
-                fit: BoxFit.none,
+        GestureDetector(
+          onTap:(){},
+          child: ClipOval(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: const Color(0xff30393C).withOpacity(0.5),
+                ),
+                child: SvgPicture.asset(
+                  picture,
+                  fit: BoxFit.none,
+                ),
               ),
             ),
           ),

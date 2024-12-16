@@ -9,6 +9,8 @@ import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/main.dart';
+import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 
 class ChoseModePage extends StatelessWidget {
   const ChoseModePage({super.key});
@@ -48,16 +50,20 @@ class ChoseModePage extends StatelessWidget {
                 const SizedBox(
                   height: 21,
                 ),
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Customcolumnchosemode(
+                      ontap: (){
+                       
+                      } 
+                      ,
                         text: 'Light Mode', picture: AppVectors.sun),
                     SizedBox(
                       width: 50,
                     ),
                     Customcolumnchosemode(
-                        text: 'Dark Mode', picture: AppVectors.moon)
+                        text: 'Dark Mode', picture: AppVectors.moon, ontap: () {  },)
                   ],
                 ),
                 const SizedBox(
