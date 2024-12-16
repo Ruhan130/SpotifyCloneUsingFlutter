@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Spotify Clone',
       theme: Apptheme.lightTheme,
+      debugShowCheckedModeBanner: false,
       home: SplashPage(),
     );
   }
