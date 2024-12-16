@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +10,7 @@ import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
-import 'package:project/main.dart';
+
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 
 class ChoseModePage extends StatelessWidget {
@@ -50,20 +51,49 @@ class ChoseModePage extends StatelessWidget {
                 const SizedBox(
                   height: 21,
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Customcolumnchosemode(
-                      ontap: (){
-                       
-                      } 
-                      ,
-                        text: 'Light Mode', picture: AppVectors.sun),
-                    SizedBox(
+                    GestureDetector(
+                      onTap: () {
+                        context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                      },
+                      child: const Customcolumnchosemode(
+                          text: 'Light Mode', picture: AppVectors.sun),
+                    ),
+                    const SizedBox(
                       width: 50,
                     ),
-                    Customcolumnchosemode(
-                        text: 'Dark Mode', picture: AppVectors.moon, ontap: () {  },)
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff30393C).withOpacity(0.5),
+                                ),
+                                child: SvgPicture.asset(
+                                  AppVectors.moon,
+                                  fit: BoxFit.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        CustomTextwiget(
+                          text: 'Dark Mode',
+                          color: AppColor.textColorWhite,
+                          fontWeight: FontWeight.w500,
+                        )
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(
