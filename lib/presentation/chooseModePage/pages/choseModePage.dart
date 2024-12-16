@@ -64,7 +64,7 @@ class ChoseModePage extends StatelessWidget {
                   height: 100,
                 ),
                 CustomElevatedButton(
-                  tittle: 'Get Started',
+                  tittle: 'Continoue',
                   onpressed: () {
                     Navigator.push(
                         context,
