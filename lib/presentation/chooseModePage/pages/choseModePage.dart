@@ -59,41 +59,26 @@ class ChoseModePage extends StatelessWidget {
                       onTap: () {
                         context.read<ThemeCubit>().updateTheme(ThemeMode.light);
                       },
-                      child: const Customcolumnchosemode(
-                          text: 'Light Mode', picture: AppVectors.sun),
+                      child: Customcolumnchosemode(
+                        text: 'Light Mode',
+                        picture: AppVectors.sun,
+                        isSelected: context.watch<ThemeCubit>().state ==
+                            ThemeMode.light,
+                      ),
                     ),
                     const SizedBox(
                       width: 50,
                     ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
-                          },
-                          child: ClipOval(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff30393C).withOpacity(0.5),
-                                ),
-                                child: SvgPicture.asset(
-                                  AppVectors.moon,
-                                  fit: BoxFit.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const CustomTextwiget(
-                          text: 'Dark Mode',
-                          color: AppColor.textColorWhite,
-                          fontWeight: FontWeight.w500,
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                      },
+                      child: Customcolumnchosemode(
+                        text: 'Dark Mode',
+                        picture: AppVectors.moon,
+                        isSelected:
+                            context.watch<ThemeCubit>().state == ThemeMode.dark,
+                      ),
                     ),
                   ],
                 ),
@@ -101,16 +86,17 @@ class ChoseModePage extends StatelessWidget {
                   height: 100,
                 ),
                 CustomElevatedButton(
-                  tittle: 'Continoue',
+                  tittle: 'Continue',
                   onpressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpOrSignIn(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpOrSignIn(),
+                      ),
+                    );
                   },
                   textColor: Colors.white,
-                )
+                ),
               ],
             ),
           ),

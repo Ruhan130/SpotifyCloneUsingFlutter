@@ -1,42 +1,41 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project/common/customTextWiget.dart';
-import 'package:project/core/config/theme/app_color.dart';
 
 class Customcolumnchosemode extends StatelessWidget {
   final String text;
   final String picture;
-  const Customcolumnchosemode(
-      {super.key, required this.text, required this.picture});
+  final bool isSelected;
 
-  // final String text ;
+  const Customcolumnchosemode({
+    required this.text,
+    required this.picture,
+    this.isSelected = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipOval(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xff30393C).withOpacity(0.5),
-              ),
-              child: SvgPicture.asset(
-                picture,
-                fit: BoxFit.none,
-              ),
-            ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isSelected ? Colors.blue : Colors.transparent,
+          ),
+          child: SvgPicture.asset(
+            picture,
+            height: 50,
+            width: 50,
           ),
         ),
-        CustomTextwiget(
-          text: text,
-          color: AppColor.textColorWhite,
-          fontWeight: FontWeight.w500,
-        )
+        const SizedBox(height: 8),
+        Text(
+          text,
+          style: TextStyle(
+            color: isSelected ? Colors.blue : Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
