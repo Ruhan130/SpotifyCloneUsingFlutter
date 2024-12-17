@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/customElevatedButton.dart';
 import 'package:project/common/customTextWiget.dart';
+import 'package:project/common/helper/isDark.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 
@@ -16,7 +17,8 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor, // Dynamic background
+      backgroundColor:
+          Theme.of(context).scaffoldBackgroundColor, // Dynamic background
       body: Stack(
         children: [
           Align(
@@ -42,11 +44,13 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                   const SizedBox(
                     height: 30,
                   ),
-                  const FittedBox(
+                  FittedBox(
                     fit: BoxFit.scaleDown,
                     child: CustomTextwiget(
                       text: "Enjoy Listening to Music",
-                      color: Colors.white,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       fontWeight: FontWeight.bold,
                       textFontsize: 26,
                       textAlign: TextAlign.center,
@@ -71,6 +75,10 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                         flex: 1,
                         child: CustomElevatedButton(
                           tittle: 'Register',
+                          textColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.white,
                           onpressed: () {},
                         ),
                       ),
