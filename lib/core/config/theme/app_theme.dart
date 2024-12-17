@@ -51,10 +51,13 @@ class Apptheme {
     ),
     scaffoldBackgroundColor: AppColor.darkBackground,
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-      backgroundColor: AppColor.primary,
-      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-    )),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColor.primary,
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+    ),
   );
 }
