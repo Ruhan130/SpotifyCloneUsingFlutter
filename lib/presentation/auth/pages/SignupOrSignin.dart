@@ -5,6 +5,7 @@ import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
+import 'package:project/presentation/auth/pages/signup.dart';
 
 class SignUpOrSignIn extends StatefulWidget {
   const SignUpOrSignIn({super.key});
@@ -21,7 +22,7 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
           Theme.of(context).scaffoldBackgroundColor, // Dynamic background
       body: Stack(
         children: [
-          BasicAppbar(),
+          const BasicAppbar(),
           Align(
             alignment: Alignment.topRight,
             child: SvgPicture.asset(AppVectors.topPattern),
@@ -80,7 +81,9 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                               Theme.of(context).brightness == Brightness.dark
                                   ? Colors.white
                                   : Colors.white,
-                          onpressed: () {},
+                          onpressed: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUp(),));
+                          },
                         ),
                       ),
                       const SizedBox(
