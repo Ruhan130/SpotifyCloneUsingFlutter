@@ -57,7 +57,7 @@ class ChoseModePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                        context.read<ThemeCubit>().updateTheme(ThemeMode.light);
                       },
                       child: const Customcolumnchosemode(
                           text: 'Light Mode', picture: AppVectors.sun),
