@@ -10,6 +10,7 @@ import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/auth/pages/SignupOrSignin.dart';
 
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 
@@ -87,7 +88,7 @@ class ChoseModePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        CustomTextwiget(
+                        const CustomTextwiget(
                           text: 'Dark Mode',
                           color: AppColor.textColorWhite,
                           fontWeight: FontWeight.w500,
@@ -105,7 +106,7 @@ class ChoseModePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ChoseModePage(),
+                          builder: (context) => const SignUpOrSignIn(),
                         ));
                   },
                   textColor: Colors.white,
