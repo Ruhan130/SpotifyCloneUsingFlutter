@@ -45,7 +45,8 @@ class SignUp extends StatelessWidget {
               tittle: 'Create Account',
               onpressed: () {},
               textColor: Colors.white,
-            )
+            ),
+            const SizedBox(height: 80,)
           ],
         ),
       ),
@@ -113,6 +114,7 @@ class SignUp extends StatelessWidget {
           child: CustomTextwiget(
             text: 'Sign in',
             color: Colors.blue[600],
+            fontWeight: FontWeight.w500,
             textFontsize: 12,
           ),
         ),
