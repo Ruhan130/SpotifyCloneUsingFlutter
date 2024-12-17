@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project/common/customColumnChoseMode.dart';
-import 'package:project/common/customElevatedButton.dart';
-import 'package:project/common/customTextWiget.dart';
+import 'package:project/common/widgets/customColumnChoseMode.dart';
+import 'package:project/common/widgets/customElevatedButton.dart';
+import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
