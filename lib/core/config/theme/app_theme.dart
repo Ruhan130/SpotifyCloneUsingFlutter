@@ -8,7 +8,7 @@ class Apptheme {
     fontFamily: 'Satoshi',
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: Colors.transparent,
       hintStyle: const TextStyle(
           color: Color(0xff383838), fontWeight: FontWeight.w500),
       contentPadding: const EdgeInsets.all(30),
