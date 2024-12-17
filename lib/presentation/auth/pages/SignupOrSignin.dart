@@ -5,6 +5,7 @@ import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
+import 'package:project/presentation/auth/pages/SignIn.dart';
 import 'package:project/presentation/auth/pages/signup.dart';
 
 class SignUpOrSignIn extends StatefulWidget {
@@ -82,7 +83,11 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                                   ? Colors.white
                                   : Colors.white,
                           onpressed: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUp(),));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUp(),
+                                ));
                           },
                         ),
                       ),
@@ -90,7 +95,13 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                         width: 10,
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignIn(),
+                              ));
+                        },
                         child: CustomTextwiget(
                           text: 'Sign In',
                           fontWeight: FontWeight.bold,
