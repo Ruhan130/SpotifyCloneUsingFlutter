@@ -4,13 +4,20 @@ import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
+import 'package:project/data/models/auth/signin_user.dart';
+import 'package:project/data/sources/auth/auth_firebase_service.dart';
+import 'package:project/domain/usecases/auth/signin.dart';
 import 'package:project/presentation/auth/pages/signup.dart';
+import 'package:project/presentation/root/pages/root.dart';
+import 'package:project/service_locator.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+  SignIn({super.key});
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _signUpText(context),
       appBar: BasicAppbar(
@@ -20,31 +27,57 @@ class SignIn extends StatelessWidget {
           width: 40,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _registerText(context),
-            const SizedBox(
-              height: 50,
-            ),
-           
-            _EmailField(context),
-            const SizedBox(
-              height: 15,
-            ),
-            _PasswordField(context),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomElevatedButton(
-              tittle: 'Sign In',
-              onpressed: () {},
-              textColor: Colors.white,
-            ),
-            const SizedBox(height: 100,)
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _registerText(context),
+              const SizedBox(
+                height: 50,
+              ),
+              _EmailField(context),
+              const SizedBox(
+                height: 15,
+              ),
+              _PasswordField(context),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomElevatedButton(
+                tittle: 'Sign In',
+                onpressed: () async {
+                  var result = await sl<SigninUseCase>().call(
+                    Params: SigninUserReq(
+                        email: _email.text.toString(),
+                        password: _password.text.toString()),
+                  );
+                  result.fold(
+                    (l) {
+                      var snackbar = SnackBar(
+                        content: Text(l),
+                        behavior: SnackBarBehavior.floating,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                    (r) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RootPage(),
+                          ),
+                          (route) => false);
+                    },
+                  );
+                },
+                textColor: Colors.white,
+              ),
+              const SizedBox(
+                height: 100,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -62,9 +95,9 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  
   Widget _EmailField(BuildContext context) {
     return TextField(
+      controller: _email,
       decoration: const InputDecoration(
         hintText: 'Enter Username or Email',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
@@ -73,6 +106,7 @@ class SignIn extends StatelessWidget {
 
   Widget _PasswordField(BuildContext context) {
     return TextField(
+      controller: _password,
       decoration: const InputDecoration(
         hintText: 'Enter Password',
       ).applyDefaults(Theme.of(context).inputDecorationTheme),
@@ -98,7 +132,7 @@ class SignIn extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  SignUp(),
+                  builder: (context) => SignUp(),
                 ));
           },
           child: CustomTextwiget(

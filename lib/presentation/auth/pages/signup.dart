@@ -26,54 +26,62 @@ class SignUp extends StatelessWidget {
           width: 40,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _registerText(context),
-            const SizedBox(
-              height: 50,
-            ),
-            _fullNameField(context),
-            const SizedBox(
-              height: 15,
-            ),
-            _EmailField(context),
-            const SizedBox(
-              height: 15,
-            ),
-            _PasswordField(context),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomElevatedButton(
-              tittle: 'Create Account',
-              onpressed: () async {
-                var result = await sl<SignupUseCase>().call(
-                  Params: CreateUserReq(
-                      fullName: fullname.text.toString(),
-                      email: _email.text.toString(),
-                      password: _password.text.toString()),
-                );
-                result.fold(
-                  (l) {
-                    var snackbar = SnackBar(
-                      content: Text(l),
-                      behavior: SnackBarBehavior.floating,
-                    );
-                  },
-                  (r) {
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const RootPage(),), (route)=> false);    
-                  },
-                );
-              },
-              textColor: Colors.white,
-            ),
-            const SizedBox(
-              height: 80,
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _registerText(context),
+              const SizedBox(
+                height: 50,
+              ),
+              _fullNameField(context),
+              const SizedBox(
+                height: 15,
+              ),
+              _EmailField(context),
+              const SizedBox(
+                height: 15,
+              ),
+              _PasswordField(context),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomElevatedButton(
+                tittle: 'Create Account',
+                onpressed: () async {
+                  var result = await sl<SignupUseCase>().call(
+                    Params: CreateUserReq(
+                        fullName: fullname.text.toString(),
+                        email: _email.text.toString(),
+                        password: _password.text.toString()),
+                  );
+                  result.fold(
+                    (l) {
+                      var snackbar = SnackBar(
+                        content: Text(l),
+                        behavior: SnackBarBehavior.floating,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    },
+                    (r) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RootPage(),
+                          ),
+                          (route) => false);
+                    },
+                  );
+                },
+                textColor: Colors.white,
+              ),
+              const SizedBox(
+                height: 80,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -137,7 +145,7 @@ class SignUp extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SignIn(),
+                  builder: (context) => SignIn(),
                 ));
           },
           child: CustomTextwiget(
