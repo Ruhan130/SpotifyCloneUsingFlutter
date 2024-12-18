@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project/common/customElevatedButton.dart';
+import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
-import 'package:project/common/customTextWiget.dart';
+import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/presentation/chooseModePage/pages/choseModePage.dart';
 
 class GetStarted extends StatelessWidget {

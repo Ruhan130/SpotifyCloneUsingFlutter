@@ -20,11 +20,14 @@ class CustomTextwiget extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
+      overflow: TextOverflow.clip, 
       style: TextStyle(
+        decoration: TextDecoration.none,
         fontSize: textFontsize,
         fontFamily: fontFamily,
         fontWeight: fontWeight,
         color: color,
+        
         
       ),
     );

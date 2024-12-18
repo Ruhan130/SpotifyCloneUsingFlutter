@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project/common/customColumnChoseMode.dart';
-import 'package:project/common/customElevatedButton.dart';
-import 'package:project/common/customTextWiget.dart';
+import 'package:project/common/widgets/customColumnChoseMode.dart';
+import 'package:project/common/widgets/customElevatedButton.dart';
+import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/auth/pages/SignupOrSignin.dart';
 
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 
@@ -56,43 +57,28 @@ class ChoseModePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                        context.read<ThemeCubit>().updateTheme(ThemeMode.light);
                       },
-                      child: const Customcolumnchosemode(
-                          text: 'Light Mode', picture: AppVectors.sun),
+                      child: Customcolumnchosemode(
+                        text: 'Light Mode',
+                        picture: AppVectors.sun,
+                        isSelected: context.watch<ThemeCubit>().state ==
+                            ThemeMode.light,
+                      ),
                     ),
                     const SizedBox(
                       width: 50,
                     ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
-                          },
-                          child: ClipOval(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff30393C).withOpacity(0.5),
-                                ),
-                                child: SvgPicture.asset(
-                                  AppVectors.moon,
-                                  fit: BoxFit.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        CustomTextwiget(
-                          text: 'Dark Mode',
-                          color: AppColor.textColorWhite,
-                          fontWeight: FontWeight.w500,
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                      },
+                      child: Customcolumnchosemode(
+                        text: 'Dark Mode',
+                        picture: AppVectors.moon,
+                        isSelected:
+                            context.watch<ThemeCubit>().state == ThemeMode.dark,
+                      ),
                     ),
                   ],
                 ),
@@ -100,16 +86,17 @@ class ChoseModePage extends StatelessWidget {
                   height: 100,
                 ),
                 CustomElevatedButton(
-                  tittle: 'Continoue',
+                  tittle: 'Continue',
                   onpressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ChoseModePage(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpOrSignIn(),
+                      ),
+                    );
                   },
                   textColor: Colors.white,
-                )
+                ),
               ],
             ),
           ),
