@@ -7,6 +7,7 @@ import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/data/models/auth/create_user_req.dart';
 import 'package:project/domain/usecases/auth/signup.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
+import 'package:project/presentation/root/pages/root.dart';
 import 'package:project/service_locator.dart';
 
 class SignUp extends StatelessWidget {
@@ -38,7 +39,7 @@ class SignUp extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            _fullNameField(context),
+            _EmailField(context),
             const SizedBox(
               height: 15,
             ),
@@ -54,6 +55,17 @@ class SignUp extends StatelessWidget {
                       fullName: fullname.text.toString(),
                       email: _email.text.toString(),
                       password: _password.text.toString()),
+                );
+                result.fold(
+                  (l) {
+                    var snackbar = SnackBar(
+                      content: Text(l),
+                      behavior: SnackBarBehavior.floating,
+                    );
+                  },
+                  (r) {
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const RootPage(),), (route)=> false);    
+                  },
                 );
               },
               textColor: Colors.white,
