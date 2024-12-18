@@ -7,7 +7,6 @@ import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/data/models/auth/create_user_req.dart';
 import 'package:project/domain/usecases/auth/signup.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
-import 'package:project/presentation/root/pages/root.dart';
 import 'package:project/service_locator.dart';
 
 class SignUp extends StatelessWidget {
