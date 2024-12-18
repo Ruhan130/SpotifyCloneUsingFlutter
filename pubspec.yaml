@@ -40,6 +40,7 @@ dependencies:
   hydrated_bloc: ^9.0.0
   path_provider: 
   provider: ^6.0.5
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
