@@ -7,7 +7,7 @@ import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/data/models/auth/signin_user.dart';
 import 'package:project/domain/usecases/auth/signin.dart';
 import 'package:project/presentation/auth/pages/signup.dart';
-import 'package:project/presentation/root/pages/root.dart';
+import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/service_locator.dart';
 
 class SignIn extends StatelessWidget {
