@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/scheduler/ticker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
@@ -7,6 +7,7 @@ import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/Home/bloc/home_screen_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
+    super.initState();
     _tabController = TabController(length: 4, vsync: this);
   }
 
@@ -45,9 +47,37 @@ class _HomePageState extends State<HomePage>
             ),
             const SizedBox(
               height: 10,
-              
             ),
             _tabs(context),
+            BlocBuilder<HomeScreenBloc, HomeScreenState>(
+              builder: (context, state) {
+                if (state is HomeScreenInitial) {
+                  return const Center(
+                    child: Text("Please wait......"),
+                  );
+                } else if (state is HomeScreenLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is HomeScreenLoaded) {
+                  return ListView.builder(
+                      itemCount: state.posts.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(state.posts[index].tittle),
+                          subtitle: Text(state.posts[index].body),
+                        );
+                      },
+                      );
+                }else if(state is HomeScreenError){
+                  return Center(
+                    child: Text('Error  ${state.message}'),
+                  );
+                }else{
+                  return Container();
+                }
+              },
+            )
           ],
         ),
       ),
@@ -89,11 +119,27 @@ class _HomePageState extends State<HomePage>
           dividerColor: Colors.transparent,
           isScrollable: true,
           labelColor: context.isDarkMode ? Colors.black : Colors.white,
-          tabs: const [ 
-            CustomTextwiget(text: 'News', fontWeight: FontWeight.w500,textFontsize: 12,),
-            CustomTextwiget(text: 'Videos', fontWeight: FontWeight.w500,textFontsize: 12,),
-            CustomTextwiget(text: 'Artist', fontWeight: FontWeight.w500,textFontsize: 12,),
-            CustomTextwiget(text: 'Podcasts', fontWeight: FontWeight.w500,textFontsize: 12,),
+          tabs: const [
+            CustomTextwiget(
+              text: 'News',
+              fontWeight: FontWeight.w500,
+              textFontsize: 12,
+            ),
+            CustomTextwiget(
+              text: 'Videos',
+              fontWeight: FontWeight.w500,
+              textFontsize: 12,
+            ),
+            CustomTextwiget(
+              text: 'Artist',
+              fontWeight: FontWeight.w500,
+              textFontsize: 12,
+            ),
+            CustomTextwiget(
+              text: 'Podcasts',
+              fontWeight: FontWeight.w500,
+              textFontsize: 12,
+            ),
           ]),
     );
   }
