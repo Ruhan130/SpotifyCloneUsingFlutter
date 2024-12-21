@@ -63,8 +63,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           itemCount: state.posts.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(state.posts[index].title),
-              subtitle: Text(state.posts[index].body),
+              title: Text(state.posts[index].title ?? '' ),
+
             );
           },
         ),
@@ -128,4 +128,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
     );
   }
+
+  
 }
