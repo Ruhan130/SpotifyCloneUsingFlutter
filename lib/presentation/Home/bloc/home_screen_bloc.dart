@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:project/presentation/Home/model/homeModel.dart';
 
-import 'package:project/presentation/Home/pages/repository/homeRepo.dart';
+import 'package:project/presentation/Home/repository/homeRepo.dart';
 
 part 'home_screen_event.dart';
 part 'home_screen_state.dart';

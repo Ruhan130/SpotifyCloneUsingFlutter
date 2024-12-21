@@ -10,9 +10,10 @@ class homeRepo{
     // ignore: non_constant_identifier_names
     final Response = await http.get(Uri.parse(apiurl));
     if(Response.statusCode == 200){
+      print(Response.body);
       List jsonResponse = json.decode(Response.body);
       return jsonResponse.map((post)=> Homemodel.fromJson(post)).toList();
-      print(jsonResponse);
+      
     }
     else{
       throw Exception('Failed to load posts');
