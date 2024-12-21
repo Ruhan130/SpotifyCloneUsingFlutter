@@ -3,15 +3,15 @@ import 'dart:convert';
 
 class Homemodel {
   final int id;
-  final String tittle;
+  final String title;  // Fixed typo: "tittle" to "title"
   final String body;
 
-  Homemodel({required this.id, required this.tittle, required this.body});
+  Homemodel({required this.id, required this.title, required this.body});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'tittle': tittle,
+      'title': title,
       'body': body,
     };
   }
@@ -19,12 +19,21 @@ class Homemodel {
   factory Homemodel.fromMap(Map<String, dynamic> map) {
     return Homemodel(
       id: map['id'] as int,
-      tittle: map['tittle'] as String,
+      title: map['title'] as String,  // Fixed typo here too
       body: map['body'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Homemodel.fromJson(String source) => Homemodel.fromMap(json.decode(source) as Map<String, dynamic>);
+ factory Homemodel.fromJson(String source) {
+  try {
+    var map = json.decode(source); // decode the string into a Map
+    print(map); // print the map to see if it's correct
+    return Homemodel.fromMap(map); // map to Homemodel
+  } catch (e) {
+    print('Error parsing JSON: $e');
+    rethrow;
+  }
+}
 }

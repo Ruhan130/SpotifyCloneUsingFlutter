@@ -16,8 +16,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -45,39 +44,40 @@ class _HomePageState extends State<HomePage>
               padding: const EdgeInsets.only(bottom: 10),
               child: _homeToCard(context),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             _tabs(context),
             BlocBuilder<HomeScreenBloc, HomeScreenState>(
-              builder: (context, state) {
-                if (state is HomeScreenInitial) {
-                  return const Center(
-                    child: Text("Please wait......"),
-                  );
-                } else if (state is HomeScreenLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is HomeScreenLoaded) {
-                  return ListView.builder(
-                      itemCount: state.posts.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(state.posts[index].tittle),
-                          subtitle: Text(state.posts[index].body),
-                        );
-                      },
-                      );
-                }else if(state is HomeScreenError){
-                  return Center(
-                    child: Text('Error  ${state.message}'),
-                  );
-                }else{
-                  return Container();
-                }
-              },
-            )
+  builder: (context, state) {
+    if (state is HomeScreenInitial) {
+      return const Center(
+        child: Text("Please wait......"),
+      );
+    } else if (state is HomeScreenLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (state is HomeScreenLoaded) {
+      return SizedBox(
+        height: 300  ,
+        child: ListView.builder(
+          itemCount: state.posts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(state.posts[index].title),
+              subtitle: Text(state.posts[index].body),
+            );
+          },
+        ),
+      );
+    } else if (state is HomeScreenError) {
+      return Center(
+        child: Text('Error: ${state.message}'),
+      );
+    } else {
+      return Container();
+    }
+  },
+)
           ],
         ),
       ),
@@ -113,34 +113,19 @@ class _HomePageState extends State<HomePage>
   Widget _tabs(BuildContext context) {
     return Center(
       child: TabBar(
-          controller: _tabController,
-          indicatorColor: AppColor.primary,
-          indicatorSize: TabBarIndicatorSize.label,
-          dividerColor: Colors.transparent,
-          isScrollable: true,
-          labelColor: context.isDarkMode ? Colors.black : Colors.white,
-          tabs: const [
-            CustomTextwiget(
-              text: 'News',
-              fontWeight: FontWeight.w500,
-              textFontsize: 12,
-            ),
-            CustomTextwiget(
-              text: 'Videos',
-              fontWeight: FontWeight.w500,
-              textFontsize: 12,
-            ),
-            CustomTextwiget(
-              text: 'Artist',
-              fontWeight: FontWeight.w500,
-              textFontsize: 12,
-            ),
-            CustomTextwiget(
-              text: 'Podcasts',
-              fontWeight: FontWeight.w500,
-              textFontsize: 12,
-            ),
-          ]),
+        controller: _tabController,
+        indicatorColor: AppColor.primary,
+        indicatorSize: TabBarIndicatorSize.label,
+        dividerColor: Colors.transparent,
+        isScrollable: true,
+        labelColor: context.isDarkMode ? Colors.black : Colors.white,
+        tabs: const [
+          CustomTextwiget(text: 'News', fontWeight: FontWeight.w500, textFontsize: 12),
+          CustomTextwiget(text: 'Videos', fontWeight: FontWeight.w500, textFontsize: 12),
+          CustomTextwiget(text: 'Artist', fontWeight: FontWeight.w500, textFontsize: 12),
+          CustomTextwiget(text: 'Podcasts', fontWeight: FontWeight.w500, textFontsize: 12),
+        ],
+      ),
     );
   }
 }

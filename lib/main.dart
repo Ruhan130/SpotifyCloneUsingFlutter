@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
 import 'package:project/presentation/Home/bloc/home_screen_bloc.dart';
-
+import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/Home/repository/homeRepo.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 import 'package:project/presentation/splash/pages/splash.dart';
@@ -29,19 +29,14 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => ThemeCubit(),
-        ),
+        BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider<HomeScreenBloc>(
-          create: (context) => HomeScreenBloc(
-            homeRepo(),
-          )..add(fetchPosts()),
-        )
+          create: (context) => HomeScreenBloc(HomeRepo())..add(FetchPosts()),
+        ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, mode) => MaterialApp(
@@ -50,7 +45,7 @@ class MyApp extends StatelessWidget {
           darkTheme: Apptheme.darkTheme,
           themeMode: mode,
           debugShowCheckedModeBanner: false,
-          home: const SplashPage(),
+          home: const HomePage(),
         ),
       ),
     );
