@@ -6,12 +6,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
-import 'package:project/presentation/Home/bloc/home_screen_bloc.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
-import 'package:project/presentation/Home/repository/homeRepo.dart';
+
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
-      
+        // ChangeNotifierProvider(create: (_) => Newsongprovider()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, mode) => MaterialApp(

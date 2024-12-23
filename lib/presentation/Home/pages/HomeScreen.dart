@@ -135,7 +135,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  // ignore: non_constant_identifier_names
   Widget _NewRow() {
     return const SingleChildScrollView(
       scrollDirection: Axis.horizontal,

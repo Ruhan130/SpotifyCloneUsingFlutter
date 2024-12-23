@@ -1,6 +1,14 @@
-class NewSongsection {
- final String name;
- final String imagUrl;
- final String tittle;
-  NewSongsection({required this.name,required this.imagUrl,required this.tittle});
+class Song {
+  List<Map<String, String>> songs = [
+    {
+      'name': 'Song 1',
+      'title': 'Title 1',
+      'image': 'path/to/image1.jpg',
+    },
+    {
+      'name': 'Song 2',
+      'title': 'Title 2',
+      'image': 'path/to/image2.jpg',
+    },
+  ];
 }
