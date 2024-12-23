@@ -17,11 +17,15 @@ class CustomColumnForNewTab extends StatelessWidget {
           height: 180,
           width: 140,
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                image,
-                fit: BoxFit.fill,
-              )),
+            borderRadius: BorderRadius.circular(15),
+            child: Image.asset(
+              image,
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
         ),
         CustomTextwiget(
           text: text,
