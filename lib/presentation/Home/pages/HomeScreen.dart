@@ -70,10 +70,8 @@ class _HomePageState extends State<HomePage>
               height: 250, // Explicit height
               child: _NewRow(songs),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Playlist(),
+          
+             Playlist(),
           ],
         ),
       ),
