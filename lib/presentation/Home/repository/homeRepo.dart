@@ -12,7 +12,6 @@ Future<List<Homemodel>> fetchData() async {
     print(Response.body);
     // Here, make sure to decode the response body into Map<String, dynamic>
     List<dynamic> jsonResponse = json.decode(Response.body);  // This will be a List of Maps
-    
     // Now map it to Homemodel objects
     return jsonResponse.map((post) => Homemodel.fromJson(post)).toList();
   } else {

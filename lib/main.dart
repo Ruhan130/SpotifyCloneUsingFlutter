@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
-        BlocProvider<HomeScreenBloc>(
-          create: (context) => HomeScreenBloc(HomeRepo())..add(FetchPosts()),
-        ),
+        // BlocProvider<HomeScreenBloc>(
+        //   create: (context) => HomeScreenBloc(HomeRepo())..add(FetchPosts()),
+        // ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, mode) => MaterialApp(
