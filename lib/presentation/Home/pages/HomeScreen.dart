@@ -6,7 +6,7 @@ import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
-import 'package:project/presentation/Home/pages/widget/custom_column_for_New_tab.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
