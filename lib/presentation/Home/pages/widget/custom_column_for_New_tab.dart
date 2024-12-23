@@ -15,14 +15,16 @@ class CustomColumnForNewTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 180,
-          width: 140,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              image,
-              fit: BoxFit.fill,
+        Expanded(
+          child: SizedBox(
+            height: 180,
+            width: 140,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                image,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
@@ -36,7 +38,7 @@ class CustomColumnForNewTab extends StatelessWidget {
           textFontsize: 15,
         ),
         Align(
-          alignment: Alignment.bottomLeft,
+          alignment: Alignment.topRight,
           child: Container(
             height: 40,
             width: 40,
@@ -45,7 +47,7 @@ class CustomColumnForNewTab extends StatelessWidget {
               shape: BoxShape.circle,
               color: context.isDarkMode? AppColor.darkGrey : const Color(0xffE6E6E6)
             ),
-            child: Icon(Icons.play_arrow_rounded,color: context.isDarkMode?  const Color(0xff55555) : const Color(0xff959595),),
+            child: Icon(Icons.play_arrow_rounded,color: context.isDarkMode?   Colors.white : Colors.black,),
           ),
         ),
       ],
@@ -53,3 +55,63 @@ class CustomColumnForNewTab extends StatelessWidget {
   }
 }
  
+//             BlocBuilder<HomeScreenBloc, HomeScreenState>(
+//   builder: (context, state) {
+//     if (state is HomeScreenInitial) {
+//       return const Center(
+//         child: Text("Please wait......"),
+//       );
+//     } else if (state is HomeScreenLoading) {
+//       return const Center(
+//         child: CircularProgressIndicator(),
+//       );
+//     } else if (state is HomeScreenLoaded) {
+//       return SizedBox(
+//         height: 300  ,
+//         child: ListView.builder(
+//           itemCount: state.posts.length,
+//           itemBuilder: (context, index) {
+//             return ListTile(
+//               title: Text(state.posts[index].title ?? '' ),
+
+//             );
+//           },
+//         ),
+//       );
+//     } else if (state is HomeScreenError) {
+//       return Center(
+//         child: Text('Error: ${state.message}'),
+//       );
+//     } else {
+//       return Container();
+//     }
+//   },
+// )
+ // Widget _NewRow() {
+  //   return const SingleChildScrollView(
+  //     scrollDirection: Axis.horizontal,
+  //     child: Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+  //       child: Row(
+  //         children: [
+  //           CustomColumnForNewTab(
+  //               image: AppImage.bili_eilish2, text: 'Bili Eilish'),
+  //           SizedBox(
+  //             width: 10,
+  //           ),
+  //           CustomColumnForNewTab(image: AppImage.Drake1, text: 'Drake'),
+  //           SizedBox(
+  //             width: 10,
+  //           ),
+  //           CustomColumnForNewTab(
+  //               image: AppImage.lana_del_rey2, text: 'Lana Del Rey'),
+  //           SizedBox(
+  //             width: 10,
+  //           ),
+  //           CustomColumnForNewTab(
+  //               image: AppImage.ed_sheeran, text: 'Ed sheeran')
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
