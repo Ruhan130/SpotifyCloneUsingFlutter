@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+      
   late TabController _tabController;
 
   final List<Map<String, String>> songs = [
@@ -121,58 +122,64 @@ class _HomePageState extends State<HomePage>
       shrinkWrap: true, // Ensures ListView doesn't take more space than needed
       itemCount: songs.length,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: SizedBox(
+        return 
+         
+        SizedBox(
             width: 160,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 180,
-                  width: 140,
-                  decoration:  BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(songs[index]['image'] ?? ''),
-                    ),
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Column(
+                
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
                     child: Container(
-                      height: 40,
-                      width: 40,
-                      transform: Matrix4.translationValues(10, 10, 0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: context.isDarkMode
-                              ? AppColor.darkGrey
-                              : const Color(0xffE6E6E6)),
-                      child: Icon(
-                        Icons.play_arrow_rounded,
-                        color: context.isDarkMode ? Colors.white : Colors.black,
+                      height: 180,
+                      width: 140,
+                      decoration:  BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage(songs[index]['image'] ?? ''),
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          transform: Matrix4.translationValues(10, 10, 0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: context.isDarkMode
+                                  ? AppColor.darkGrey
+                                  : const Color(0xffE6E6E6)),
+                          child: Icon(
+                            Icons.play_arrow_rounded,
+                            color: context.isDarkMode ? Colors.white : Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                CustomTextwiget(
-                  text: songs[index]['name'] ?? '',
-                  color: context.isDarkMode ? Colors.black : Colors.white,fontWeight: FontWeight.w500,
-                  textFontsize: 18,
-                ),
-                CustomTextwiget(
-                  text: songs[index]['title'] ?? '',
-                  color: context.isDarkMode ? Colors.black : Colors.white,
-                  textFontsize: 12,
-                ),
-              ],
+                  CustomTextwiget(
+                    text: songs[index]['name'] ?? '',
+                    color: context.isDarkMode ? Colors.black : Colors.white,fontWeight: FontWeight.w500,
+                    textFontsize: 18,
+                  ),
+                  CustomTextwiget(
+                    text: songs[index]['title'] ?? '',
+                    color: context.isDarkMode ? Colors.black : Colors.white,
+                    textFontsize: 12,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
+  
       },
       separatorBuilder: (context, index) => const SizedBox(
-        width: 10,
+        width: 0,
       ),
     );
   }
