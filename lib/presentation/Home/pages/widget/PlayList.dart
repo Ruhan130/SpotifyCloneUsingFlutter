@@ -46,7 +46,7 @@ class Playlist extends StatelessWidget {
   Widget _playList(List<Map<String, String>> songs) {
     return ListView.separated(
       scrollDirection: Axis.vertical,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Row(
@@ -102,7 +102,7 @@ class Playlist extends StatelessWidget {
                         ? AppColor.darkGrey
                         : const Color(0xffE6E6E6),
                   ),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.favorite_rounded,color: AppColor.darkGrey,))
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_rounded,color: AppColor.darkGrey,))
                 ],
               )
             ],

@@ -3,11 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
-import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
+import 'package:project/presentation/song-player/song_player.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,21 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final List<Map<String, String>> songs = [
-    {
-      "name": "Lovely",
-      "title": "Billie Bilish",
-      "image": AppImage.bili_eilish2
-    },
-    {"name": "One Dance", "title": "Drake", "image": AppImage.Drake1},
-    {"name": "Perfect", "title": "Ed Sheeran", "image": AppImage.ed_sheeran},
-    {
-      "name": "To heaven",
-      "title": "Lana Del Rey",
-      "image": AppImage.lana_del_rey1
-    },
-  ];
 
   @override
   void initState() {
@@ -61,17 +47,19 @@ class _HomePageState extends State<HomePage>
               child: HomeToCard(),
             ),
             const SizedBox(height: 10),
+
             _tabs(context),
+
             const SizedBox(
               height: 20,
             ),
             // Add a specific height or other constraints to the ListView
             SizedBox(
               height: 250, // Explicit height
-              child: _NewRow(songs),
+              child: _NewRow(songList),
             ),
-          
-             Playlist(),
+
+            Playlist(),
           ],
         ),
       ),
@@ -102,59 +90,72 @@ class _HomePageState extends State<HomePage>
   }
 
   // ignore: non_constant_identifier_names
-  Widget _NewRow(List<Map<String, String>> songs) {
+  Widget _NewRow(List<SongEntity> songs) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
-      shrinkWrap: true, // Ensures ListView doesn't take more space than needed
+      shrinkWrap: true,
       itemCount: songs.length,
       itemBuilder: (context, index) {
-        return SizedBox(
-          width: 160,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 200,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(songs[index]['image'] ?? ''),
+        final song = songs[index]; // Accessing SongEntity object
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SongPlayer(songEntity: song),
+              ),
+            );
+          },
+          child: SizedBox(
+            width: 160,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 200,
+                    width: 140,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(song.image), // Accessing song.image
+                      ),
                     ),
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      transform: Matrix4.translationValues(10, 10, 0),
-                      decoration: BoxDecoration(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        transform: Matrix4.translationValues(10, 10, 0),
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: context.isDarkMode
                               ? AppColor.darkGrey
-                              : const Color(0xffE6E6E6)),
-                      child: Icon(
-                        Icons.play_arrow_rounded,
-                        color: context.isDarkMode ? Colors.white : Colors.black,
+                              : const Color(0xffE6E6E6),
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_rounded,
+                          color:
+                              context.isDarkMode ? Colors.white : Colors.black,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                CustomTextwiget(
-                  text: songs[index]['name'] ?? '',
-                  color: context.isDarkMode ? Colors.black : Colors.white,
-                  fontWeight: FontWeight.w500,
-                  textFontsize: 18,
-                ),
-                CustomTextwiget(
-                  text: songs[index]['title'] ?? '',
-                  color: context.isDarkMode ? Colors.black : Colors.white,
-                  textFontsize: 12,
-                ),
-              ],
+                  CustomTextwiget(
+                    text: song.name, // Accessing song.name
+                    color: context.isDarkMode ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.w500,
+                    textFontsize: 18,
+                  ),
+                  CustomTextwiget(
+                    text: song.title, // Accessing song.title
+                    color: context.isDarkMode ? Colors.black : Colors.white,
+                    textFontsize: 12,
+                  ),
+                ],
+              ),
             ),
           ),
         );
