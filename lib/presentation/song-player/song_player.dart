@@ -25,43 +25,41 @@ class _SongPlayerState extends State<SongPlayer> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
- String formatDuration(Duration duration) {
-  final minutes = duration.inMinutes.remainder(60);
-  final seconds = duration.inSeconds.remainder(60);
-  return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
-}
-
+  String formatDuration(Duration d) {
+    final minutes = d.inMinutes.remainder(60);
+    final seconds = d.inSeconds.remainder(60);
+    return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+  }
 
   void handlePlayPause() {
-  setState(() {
     if (audioPlayer.playing) {
       audioPlayer.pause();
     } else {
       audioPlayer.play();
     }
-  });
-}
-
+  }
 
   void handleSeek(double value) {
-    audioPlayer.seek(
-      Duration(
-        seconds: value.toInt(),
-      ),
-    );
+    audioPlayer.seek(Duration(seconds: value.toInt()));
   }
 
   @override
   void initState() {
     super.initState();
-    audioPlayer.setAsset(AppMusic.lovely_by_billi);
+    audioPlayer.setAsset(widget.songEntity.audio);
 
+    // Listen to the position stream to update the current position
     audioPlayer.positionStream.listen((p) {
-      setState(() => position = p);
+      setState(() {
+        position = p; // Update the position
+      });
     });
 
-    audioPlayer.positionStream.listen((d) {
-      setState(() => duration = d!);
+    // Listen to the duration stream to update the total duration
+    audioPlayer.durationStream.listen((d) {
+      setState(() {
+        duration = d!; // Update the duration
+      });
     });
   }
 
@@ -92,7 +90,7 @@ class _SongPlayerState extends State<SongPlayer> {
               const SizedBox(
                 height: 20,
               ),
-              _songPlayer(context)
+              _songPlayer(context, songList)
             ],
           ),
         ),
@@ -149,29 +147,49 @@ class _SongPlayerState extends State<SongPlayer> {
     );
   }
 
-  Widget _songPlayer(BuildContext context) {
+  Widget _songPlayer(BuildContext context, List<SongEntity> songList) {
+    SongEntity currentSong = songList[0];
+
     return Column(
       children: [
+        // Slider for audio position
         Slider(
+          activeColor: context.isDarkMode ? Colors.black : Colors.white,
           max: duration.inSeconds.toDouble(),
-          min: 0,
+          min: 0.0,
           value: position.inSeconds.toDouble(),
           onChanged: handleSeek,
         ),
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              
               Text(
                 formatDuration(position),
               ),
+              
+              Text(currentSong.duraTion),
             ],
           ),
         ),
-        IconButton(
-          onPressed: handlePlayPause,
-          icon: Icon(audioPlayer.playing ? Icons.pause : Icons.play_arrow),
+
+        
+        Container(
+          height: 60,
+          width: 60,
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+          child: IconButton(
+            onPressed: handlePlayPause,
+            icon: Icon(
+              audioPlayer.playing ? Icons.pause : Icons.play_arrow,
+              color: context.isDarkMode ? Colors.black : Colors.white,
+              size: 30,
+            ),
+          ),
         ),
       ],
     );
