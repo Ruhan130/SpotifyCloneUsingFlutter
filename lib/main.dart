@@ -6,8 +6,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
+import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
+import 'package:project/presentation/song-player/bloc/song_player_cubmit.dart';
 import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
 
@@ -32,7 +34,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider(create: (_) => ThemeCubit(),),
+       
         // ChangeNotifierProvider(create: (_) => Newsongprovider()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

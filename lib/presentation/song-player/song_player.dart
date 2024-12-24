@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
+import 'package:project/presentation/song-player/bloc/song_player_cubmit.dart';
+import 'package:project/presentation/song-player/bloc/song_player_state.dart';
 
 class SongPlayer extends StatelessWidget {
   final SongEntity songEntity;
@@ -26,14 +29,18 @@ class SongPlayer extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            children: [
-              _songs(context, songList),
-              _songDetail(context, songList),
-            ],
+      body:  BlocProvider( create: (_) => SongPlayerCubmit(songEntity)..loadSong(songList),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              children: [
+                _songs(context, songList),
+                _songDetail(context, songList),
+                const SizedBox(height: 20,),
+                _songPlayer(context)
+              ],
+            ),
           ),
         ),
       ),
@@ -79,13 +86,40 @@ class SongPlayer extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {},
-          icon:  const Icon(
+          icon: const Icon(
             Icons.favorite_outline_outlined,
             size: 35,
             color: AppColor.darkGrey,
           ),
         ),
       ],
+    );
+  }
+
+  Widget _songPlayer(BuildContext context) {
+    return BlocBuilder<SongPlayerCubmit, SongPlayerState>(
+        builder: (context, State){
+      if (State is SongPlayerLoaded) {
+        return Column(
+          children: [
+            Slider(
+                value: context
+                    .read<SongPlayerCubmit>()
+                    .songPosition
+                    .inSeconds
+                    .toDouble(),
+                min: 0.0,
+                max: context
+                    .read<SongPlayerCubmit>()
+                    .songDuration
+                    .inSeconds
+                    .toDouble(),
+                onChanged: (value) {})
+          ],
+        );
+      }
+      return Container();
+    },
     );
   }
 }
