@@ -1,16 +1,69 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_music.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
-import 'package:project/presentation/song-player/bloc/song_player_cubmit.dart';
-import 'package:project/presentation/song-player/bloc/song_player_state.dart';
 
-class SongPlayer extends StatelessWidget {
+class SongPlayer extends StatefulWidget {
   final SongEntity songEntity;
-  const SongPlayer({super.key, required this.songEntity});
+  const SongPlayer({
+    Key? key,
+    required this.songEntity,
+  }) : super(key: key);
+
+  @override
+  State<SongPlayer> createState() => _SongPlayerState();
+}
+
+class _SongPlayerState extends State<SongPlayer> {
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+ String formatDuration(Duration duration) {
+  final minutes = duration.inMinutes.remainder(60);
+  final seconds = duration.inSeconds.remainder(60);
+  return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+}
+
+
+  void handlePlayPause() {
+  setState(() {
+    if (audioPlayer.playing) {
+      audioPlayer.pause();
+    } else {
+      audioPlayer.play();
+    }
+  });
+}
+
+
+  void handleSeek(double value) {
+    audioPlayer.seek(
+      Duration(
+        seconds: value.toInt(),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer.setAsset(AppMusic.lovely_by_billi);
+
+    audioPlayer.positionStream.listen((p) {
+      setState(() => position = p);
+    });
+
+    audioPlayer.positionStream.listen((d) {
+      setState(() => duration = d!);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +82,18 @@ class SongPlayer extends StatelessWidget {
           ),
         ),
       ),
-      body:  BlocProvider( create: (_) => SongPlayerCubmit(songEntity)..loadSong(songList),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              children: [
-                _songs(context, songList),
-                _songDetail(context, songList),
-                const SizedBox(height: 20,),
-                _songPlayer(context)
-              ],
-            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            children: [
+              _songs(context, songList),
+              _songDetail(context, songList),
+              const SizedBox(
+                height: 20,
+              ),
+              _songPlayer(context)
+            ],
           ),
         ),
       ),
@@ -57,7 +110,7 @@ class SongPlayer extends StatelessWidget {
           fit: BoxFit.fill,
           filterQuality: FilterQuality.high,
           image: AssetImage(
-            songEntity.image,
+            widget.songEntity.image,
           ),
         ),
       ),
@@ -72,13 +125,13 @@ class SongPlayer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextwiget(
-              text: songEntity.name, // Accessing song.name
+              text: widget.songEntity.name, // Accessing song.name
               color: context.isDarkMode ? Colors.black : Colors.white,
               fontWeight: FontWeight.bold,
               textFontsize: 25,
             ),
             CustomTextwiget(
-              text: songEntity.title, // Accessing song.title
+              text: widget.songEntity.title, // Accessing song.title
               color: context.isDarkMode ? Colors.black : Colors.white,
               textFontsize: 12,
             ),
@@ -97,29 +150,30 @@ class SongPlayer extends StatelessWidget {
   }
 
   Widget _songPlayer(BuildContext context) {
-    return BlocBuilder<SongPlayerCubmit, SongPlayerState>(
-        builder: (context, State){
-      if (State is SongPlayerLoaded) {
-        return Column(
-          children: [
-            Slider(
-                value: context
-                    .read<SongPlayerCubmit>()
-                    .songPosition
-                    .inSeconds
-                    .toDouble(),
-                min: 0.0,
-                max: context
-                    .read<SongPlayerCubmit>()
-                    .songDuration
-                    .inSeconds
-                    .toDouble(),
-                onChanged: (value) {})
-          ],
-        );
-      }
-      return Container();
-    },
+    return Column(
+      children: [
+        Slider(
+          max: duration.inSeconds.toDouble(),
+          min: 0,
+          value: position.inSeconds.toDouble(),
+          onChanged: handleSeek,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                formatDuration(position),
+              ),
+            ],
+          ),
+        ),
+        IconButton(
+          onPressed: handlePlayPause,
+          icon: Icon(audioPlayer.playing ? Icons.pause : Icons.play_arrow),
+        ),
+      ],
     );
   }
 }

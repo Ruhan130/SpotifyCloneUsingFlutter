@@ -20,7 +20,7 @@ class SongEntity {
       name: map['name'] ?? '',
       title: map['title'] ?? '',
       image: map['image'] ?? '',
-      audio: map['image'] ?? '',
+      audio: map['audio'] ?? '',
     );
   }
 }

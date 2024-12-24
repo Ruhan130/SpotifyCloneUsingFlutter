@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit(),),
        
-        // ChangeNotifierProvider(create: (_) => Newsongprovider()),
+      
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, mode) => MaterialApp(
