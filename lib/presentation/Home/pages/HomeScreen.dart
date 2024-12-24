@@ -8,6 +8,7 @@ import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
+import 'package:project/presentation/profile/profile.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,6 +37,22 @@ class _HomePageState extends State<HomePage>
           AppVectors.logo,
           height: 40,
           width: 40,
+        ),
+        action: Container(height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: context.isDarkMode ? Colors.black : AppColor.darkGrey,
+        ),
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Profile(),
+                    ));
+              },
+              icon:  Icon(Icons.person, color: context.isDarkMode ? Colors.black : Colors.white,)),
         ),
       ),
       body: SingleChildScrollView(
