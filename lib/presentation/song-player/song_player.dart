@@ -5,8 +5,8 @@ import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
 
 class SongPlayer extends StatelessWidget {
-  final SongEntity songEntity ;
-  const SongPlayer({super.key , required this.songEntity});
+  final SongEntity songEntity;
+  const SongPlayer({super.key, required this.songEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,25 @@ class SongPlayer extends StatelessWidget {
           ),
         ),
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _songs(context,songList)
+          ],
+        ),
+      ),
     );
+  }
+
+  Widget _songs(BuildContext context,List<SongEntity> songs) {
+    return Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              songEntity.image,
+            ),
+          ),
+        ));
   }
 }
