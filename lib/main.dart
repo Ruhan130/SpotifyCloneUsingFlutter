@@ -8,7 +8,6 @@ import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
-import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
 
 Future<void> main() async {
