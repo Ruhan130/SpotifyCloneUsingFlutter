@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/pages/AddToFavourite.dart';
@@ -31,21 +32,22 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: BasicAppbar(
         isHide: false,
         tittle: SvgPicture.asset(
           AppVectors.logo,
-          height: 40,
-          width: 40,
+          height: AppDimensions.heightLogoInHome,
+          width: AppDimensions.WeightLogoInHome,
         ),
         action: Container(
-          height: 40,
-          width: 40,
+          height: AppDimensions.containerHeightInHome,
+          width: AppDimensions.containerHeightInHome,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: context.isDarkMode ? Colors.black : AppColor.darkGrey,
+            color: context.isDarkMode
+                ? AppColor.textColorBlack
+                : AppColor.darkGrey,
           ),
           child: IconButton(
             onPressed: () {
@@ -57,7 +59,9 @@ class _HomePageState extends State<HomePage>
             },
             icon: Icon(
               Icons.favorite_border,
-              color: context.isDarkMode ? Colors.black : Colors.white,
+              color: context.isDarkMode
+                  ? AppColor.textColorBlack
+                  : AppColor.textColorWhite,
             ),
           ),
         ),
@@ -67,19 +71,19 @@ class _HomePageState extends State<HomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
-              padding: EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: AppDimensions.padingBotton10),
               child: HomeToCard(),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: AppDimensions.sizeHeight10),
 
             _tabs(context),
 
             const SizedBox(
-              height: 20,
+              height: AppDimensions.sizeHeight20,
             ),
             // Add a specific height or other constraints to the ListView
             SizedBox(
-              height: 250, // Explicit height
+              height: AppDimensions.sizeHeight250, // Explicit height
               child: _NewRow(songList),
             ),
 
@@ -92,23 +96,32 @@ class _HomePageState extends State<HomePage>
 
   Widget _tabs(BuildContext context) {
     return Center(
-
       child: TabBar(
         controller: _tabController,
         indicatorColor: AppColor.primary,
         indicatorSize: TabBarIndicatorSize.label,
         dividerColor: Colors.transparent,
         isScrollable: true,
-        labelColor: context.isDarkMode ? Colors.black : Colors.white,
+        labelColor: context.isDarkMode
+            ? AppColor.textColorBlack
+            : AppColor.textColorWhite,
         tabs: const [
           CustomTextwiget(
-              text: 'New', fontWeight: FontWeight.w500, textFontsize: 12),
+              text: 'New',
+              fontWeight: FontWeight.w500,
+              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
           CustomTextwiget(
-              text: 'Videos', fontWeight: FontWeight.w500, textFontsize: 12),
+              text: 'Videos',
+              fontWeight: FontWeight.w500,
+              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
           CustomTextwiget(
-              text: 'Artist', fontWeight: FontWeight.w500, textFontsize: 12),
+              text: 'Artist',
+              fontWeight: FontWeight.w500,
+              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
           CustomTextwiget(
-              text: 'Podcasts', fontWeight: FontWeight.w500, textFontsize: 12),
+              text: 'Podcasts',
+              fontWeight: FontWeight.w500,
+              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
         ],
       ),
     );
@@ -132,15 +145,15 @@ class _HomePageState extends State<HomePage>
             );
           },
           child: SizedBox(
-            width: 160,
+            width: AppDimensions.sizeHeight160,
             child: Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(left: AppDimensions.padingLeft15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 200,
-                    width: 140,
+                    height: AppDimensions.containerHeight200,
+                    width: AppDimensions.containerWidget140,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       image: DecorationImage(
@@ -151,33 +164,41 @@ class _HomePageState extends State<HomePage>
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Container(
-                        height: 40,
-                        width: 40,
-                        transform: Matrix4.translationValues(10, 10, 0),
+                        height: AppDimensions.containerHeightInHome,
+                        width: AppDimensions.containerWidgetInHome,
+                        transform: Matrix4.translationValues(
+                            AppDimensions.matrixTranslate10,
+                            AppDimensions.matrixTranslate10,
+                            AppDimensions.matrixTranslate0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: context.isDarkMode
                               ? AppColor.darkGrey
-                              : const Color(0xffE6E6E6),
+                              : AppColor.textColorWhite,
                         ),
                         child: Icon(
                           Icons.play_arrow_rounded,
-                          color:
-                              context.isDarkMode ? Colors.white : Colors.black,
+                          color: context.isDarkMode
+                              ? AppColor.textColorWhite
+                              : AppColor.textColorBlack,
                         ),
                       ),
                     ),
                   ),
                   CustomTextwiget(
                     text: song.name, // Accessing song.name
-                    color: context.isDarkMode ? Colors.black : Colors.white,
+                    color: context.isDarkMode
+                        ? AppColor.textColorBlack
+                        : AppColor.textColorWhite,
                     fontWeight: FontWeight.w500,
-                    textFontsize: 18,
+                    textFontsize: AppDimensions.fontsize18,
                   ),
                   CustomTextwiget(
                     text: song.title, // Accessing song.title
-                    color: context.isDarkMode ? Colors.black : Colors.white,
-                    textFontsize: 12,
+                    color: context.isDarkMode
+                        ? AppColor.textColorBlack
+                        : AppColor.textColorWhite,
+                    textFontsize: AppDimensions.homeSizeForTabHomeScreen,
                   ),
                 ],
               ),

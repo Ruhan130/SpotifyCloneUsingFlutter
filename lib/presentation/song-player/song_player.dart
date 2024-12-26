@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class SongPlayer extends StatefulWidget {
   final SongEntity songEntity;
+  // ignore: use_super_parameters
   const SongPlayer({
     Key? key,
     required this.songEntity,
@@ -71,25 +73,31 @@ class _SongPlayerState extends State<SongPlayer> {
         isHide: true,
         tittle: CustomTextwiget(
           text: 'Now Playing',
-          color: context.isDarkMode ? Colors.black : Colors.white,
+          color: context.isDarkMode
+              ? AppColor.textColorBlack
+              : AppColor.textColorWhite,
         ),
         action: IconButton(
           onPressed: () {},
           icon: Icon(
             Icons.more_vert_rounded,
-            color: context.isDarkMode ? Colors.black : Colors.white,
+            color: context.isDarkMode
+                ? AppColor.textColorBlack
+                : AppColor.textColorWhite,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.padingSemetric20,
+              vertical: AppDimensions.padingSemetric20),
           child: Column(
             children: [
               _songs(context, songList),
               _songDetail(context, songList),
               const SizedBox(
-                height: 20,
+                height: AppDimensions.sizeHeight20,
               ),
               _songPlayer(context, songList)
             ],
@@ -101,10 +109,10 @@ class _SongPlayerState extends State<SongPlayer> {
 
   Widget _songs(BuildContext context, List<SongEntity> songs) {
     return Container(
-      height: 380,
+      height: AppDimensions.containerHeight380,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(AppDimensions.borderR30),
         image: DecorationImage(
           fit: BoxFit.fill,
           filterQuality: FilterQuality.high,
@@ -125,14 +133,18 @@ class _SongPlayerState extends State<SongPlayer> {
           children: [
             CustomTextwiget(
               text: widget.songEntity.name, // Accessing song.name
-              color: context.isDarkMode ? Colors.black : Colors.white,
+              color: context.isDarkMode
+                  ? AppColor.textColorBlack
+                  : AppColor.textColorWhite,
               fontWeight: FontWeight.bold,
-              textFontsize: 25,
+              textFontsize: AppDimensions.fontsize25,
             ),
             CustomTextwiget(
               text: widget.songEntity.title, // Accessing song.title
-              color: context.isDarkMode ? Colors.black : Colors.white,
-              textFontsize: 12,
+              color: context.isDarkMode
+                  ? AppColor.textColorBlack
+                  : AppColor.textColorWhite,
+              textFontsize: AppDimensions.fontsize12,
             ),
           ],
         ),
@@ -149,7 +161,7 @@ class _SongPlayerState extends State<SongPlayer> {
                     ? Icons.favorite // If in favorites
                     : Icons.favorite_outline_outlined, // If not in favorites
                 size: 35,
-                color: isFavourite ? Colors.red : AppColor.darkGrey,
+                color: isFavourite ? AppColor.redColor : AppColor.darkGrey,
               ),
             );
           },
@@ -165,7 +177,9 @@ class _SongPlayerState extends State<SongPlayer> {
       children: [
         // Slider for audio position
         Slider(
-          activeColor: context.isDarkMode ? Colors.black : Colors.white,
+          activeColor: context.isDarkMode
+              ? AppColor.textColorBlack
+              : AppColor.textColorWhite,
           max: duration.inSeconds.toDouble(),
           min: 0.0,
           value: position.inSeconds.toDouble(),
@@ -173,7 +187,7 @@ class _SongPlayerState extends State<SongPlayer> {
         ),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding:  const EdgeInsets.symmetric(horizontal: AppDimensions.padingSemetric16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -186,16 +200,18 @@ class _SongPlayerState extends State<SongPlayer> {
         ),
 
         Container(
-          height: 60,
-          width: 60,
+          height: AppDimensions.containerHeightWeight60,
+          width: AppDimensions.containerHeightWeight60,
           decoration:
-              const BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+              const BoxDecoration(shape: BoxShape.circle, color: AppColor.primary),
           child: IconButton(
             onPressed: handlePlayPause,
             icon: Icon(
               audioPlayer.playing ? Icons.pause : Icons.play_arrow,
-              color: context.isDarkMode ? Colors.black : Colors.white,
-              size: 30,
+              color: context.isDarkMode
+                  ? AppColor.textColorBlack
+                  : AppColor.textColorWhite,
+              size: AppDimensions.iconSize30,
             ),
           ),
         ),
