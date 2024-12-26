@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage>
                       builder: (context) => const AddToFavouritre(),
                     ));
               },
-              icon:  Icon(Icons.favorite_border, color: context.isDarkMode ? Colors.black : Colors.white,)),
+              icon:  Icon(Icons.person, color: context.isDarkMode ? Colors.black : Colors.white,)),
         ),
       ),
       body: SingleChildScrollView(
