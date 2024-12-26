@@ -40,7 +40,9 @@ class AuthFirebaseImplimentation extends AuthFirebaseService {
       } else if (e.code == 'email-already-in-use') {
         message = 'Email is already in use';
       }
+            print("aaaaaaaaaaaaaaaaaaaaaaaaa${e.message}");
       return left(message);
+
     }
   }
 }

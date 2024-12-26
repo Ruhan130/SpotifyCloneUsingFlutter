@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? tittle;
   final bool isHide;
-  const BasicAppbar({super.key, this.tittle, this.isHide = true});
+  final Widget? action;
+  const BasicAppbar({super.key, this.tittle, this.isHide = true, this.action});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      actions: [
+        action ?? Container()
+      ],
       centerTitle: true,
       title: tittle ?? const Text(''),
       leading: isHide == true ? IconButton(

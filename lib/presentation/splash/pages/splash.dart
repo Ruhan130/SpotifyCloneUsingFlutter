@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/presentation/intro/pages/getStarted.dart';
 
@@ -25,10 +26,10 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> redirect() async {
-    await Future.delayed(const Duration(seconds: 2));
-    // ignore: use_build_context_synchronously
+    await Future.delayed( const Duration(seconds: AppDimensions.splashDelay));
+    
     Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
+       
         context,
         MaterialPageRoute(
           builder: (context) => const GetStarted(),

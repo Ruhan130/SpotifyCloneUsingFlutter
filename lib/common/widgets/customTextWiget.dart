@@ -21,6 +21,7 @@ class CustomTextwiget extends StatelessWidget {
       text,
       textAlign: textAlign,
       overflow: TextOverflow.clip, 
+      
       style: TextStyle(
         decoration: TextDecoration.none,
         fontSize: textFontsize,

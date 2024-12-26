@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/data/models/auth/create_user_req.dart';
 import 'package:project/domain/usecases/auth/signup.dart';
@@ -21,8 +22,8 @@ class SignUp extends StatelessWidget {
       appBar: BasicAppbar(
         tittle: SvgPicture.asset(
           AppVectors.logo,
-          height: 40,
-          width: 40,
+          height: AppDimensions.WeightLogoInHome,
+          width: AppDimensions.WeightLogoInHome,
         ),
       ),
       body: SingleChildScrollView(
