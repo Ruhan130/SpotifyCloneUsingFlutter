@@ -6,9 +6,11 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
+import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 import 'package:project/service_locator.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +30,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit(),),
+        Provider<Favourtieprovider>(create: (_) => Favourtieprovider())
        
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

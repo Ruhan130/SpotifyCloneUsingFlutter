@@ -39,21 +39,26 @@ class _HomePageState extends State<HomePage>
           height: 40,
           width: 40,
         ),
-        action: Container(height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: context.isDarkMode ? Colors.black : AppColor.darkGrey,
-        ),
+        action: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: context.isDarkMode ? Colors.black : AppColor.darkGrey,
+          ),
           child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddToFavouritre(),
-                    ));
-              },
-              icon:  Icon(Icons.person, color: context.isDarkMode ? Colors.black : Colors.white,)),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddToFavouritre(),
+                  ));
+            },
+            icon: Icon(
+              Icons.favorite_border,
+              color: context.isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(
