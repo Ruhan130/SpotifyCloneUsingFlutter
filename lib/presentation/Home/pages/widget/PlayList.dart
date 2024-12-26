@@ -3,7 +3,7 @@ import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
-import 'package:project/presentation/Home/model/playlist.dart';
+// import 'package:project/presentation/Home/model/playlist.dart';/
 import 'package:project/presentation/song-player/song_player.dart';
 
 class Playlist extends StatelessWidget {
