@@ -1,6 +1,7 @@
 class AppDimensions{
   static const double fontsize18 = 18 ; 
   static const double fontsize15 = 15 ; 
+  static const double fontsize26 = 26 ; 
   static const double fontsize12 = 12 ; 
   static const double fontsize25 = 25 ; 
   static const double matrixTranslate10 = 10 ; 

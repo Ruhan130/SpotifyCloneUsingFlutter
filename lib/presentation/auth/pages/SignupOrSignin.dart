@@ -3,8 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
+import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
 import 'package:project/presentation/auth/pages/signup.dart';
 
@@ -39,7 +41,7 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
           Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimensions.padingSemetric40 ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -52,25 +54,25 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                     child: CustomTextwiget(
                       text: "Enjoy Listening to Music",
                       color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
+                          ? AppColor.textColorWhite
+                          : AppColor.textColorBlack,
                       fontWeight: FontWeight.bold,
-                      textFontsize: 26,
+                      textFontsize: AppDimensions.fontsize26,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: AppDimensions.sizeHeight20,
                   ),
                   const CustomTextwiget(
                     text:
                         'Spotify is a proprietary Swedish audio streaming and media services provider',
-                    textFontsize: 10,
+                    textFontsize: AppDimensions.fontsize12,
                     color: Colors.grey,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: AppDimensions.sizeHeight20,
                   ),
                   Row(
                     children: [
@@ -80,8 +82,8 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                           tittle: 'Register',
                           textColor:
                               Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Colors.white,
+                                  ? AppColor.textColorWhite
+                                  : AppColor.textColorWhite,
                           onpressed: () {
                             Navigator.push(
                                 context,
@@ -92,7 +94,7 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: AppDimensions.sizeHeight10,
                       ),
                       TextButton(
                         onPressed: () {
@@ -105,10 +107,10 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
                         child: CustomTextwiget(
                           text: 'Sign In',
                           fontWeight: FontWeight.bold,
-                          textFontsize: 18,
+                          textFontsize: AppDimensions.fontsize18,
                           color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black,
+                              ? AppColor.textColorWhite
+                              : AppColor.textColorBlack,
                         ),
                       ),
                     ],
