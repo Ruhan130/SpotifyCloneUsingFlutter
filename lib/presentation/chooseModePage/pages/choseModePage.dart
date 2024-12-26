@@ -23,7 +23,7 @@ class ChoseModePage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical: AppDimensions.padingSemetric40 , horizontal: AppDimensions.padingSemetric40),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
@@ -35,7 +35,7 @@ class ChoseModePage extends StatelessWidget {
             color: Colors.black.withOpacity(0.15),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical: AppDimensions.padingSemetric40 , horizontal: AppDimensions.padingSemetric40),
             child: Column(
               children: [
                 Align(
@@ -83,7 +83,7 @@ class ChoseModePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: AppDimensions.sizeHeight100,
                 ),
                 CustomElevatedButton(
                   tittle: 'Continue',

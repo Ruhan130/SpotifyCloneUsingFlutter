@@ -37,6 +37,7 @@ class AppDimensions{
   static const double sizeHeight10 = 10 ;
   static const double sizeHeight20 = 20 ;
   static const double sizeHeight250 = 250 ;
+  static const double sizeHeight100 = 100 ;
   static const double sizeHeight160 = 160 ;
   static const double sizeHeight180 = 180 ;
   
