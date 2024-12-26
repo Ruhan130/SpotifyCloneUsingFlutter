@@ -5,10 +5,11 @@ import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/Add_to_favourite/pages/AddToFavourite.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
-import 'package:project/presentation/profile/profile.dart';
+// import 'package:project/presentation/profile/profile.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,10 +50,10 @@ class _HomePageState extends State<HomePage>
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Profile(),
+                      builder: (context) => const AddToFavouritre(),
                     ));
               },
-              icon:  Icon(Icons.person, color: context.isDarkMode ? Colors.black : Colors.white,)),
+              icon:  Icon(Icons.favorite_border, color: context.isDarkMode ? Colors.black : Colors.white,)),
         ),
       ),
       body: SingleChildScrollView(
