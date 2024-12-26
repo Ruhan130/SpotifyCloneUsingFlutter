@@ -6,6 +6,7 @@ import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/pages/AddToFavourite.dart';
+import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    final provider = Favourtieprovider.of(context);
     return Scaffold(
       appBar: BasicAppbar(
         isHide: false,
@@ -91,6 +93,7 @@ class _HomePageState extends State<HomePage>
 
   Widget _tabs(BuildContext context) {
     return Center(
+
       child: TabBar(
         controller: _tabController,
         indicatorColor: AppColor.primary,

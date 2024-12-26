@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit(),),
-        Provider<Favourtieprovider>(create: (_) => Favourtieprovider())
+        ChangeNotifierProvider(create: (_) => Favourtieprovider())
        
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

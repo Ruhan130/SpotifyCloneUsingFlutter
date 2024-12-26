@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 class Favourtieprovider extends ChangeNotifier{
   final List<SongEntity> _favourite = []; 
+  List<SongEntity> get favourite => _favourite;
   void toggleFavourite(SongEntity song){
     if(_favourite.contains(song)){
       _favourite.remove(song);
@@ -19,7 +20,7 @@ class Favourtieprovider extends ChangeNotifier{
   }
 
 
-  static Favourtieprovider of(BuildContext context, {bool listen = true}){
+  static Favourtieprovider of(BuildContext context, {bool listen = false}){
     return Provider.of<Favourtieprovider>(context, listen:  listen);
   }
 }
