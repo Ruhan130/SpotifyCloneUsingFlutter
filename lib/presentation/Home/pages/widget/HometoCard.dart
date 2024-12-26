@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 
@@ -10,7 +11,7 @@ class HomeToCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        height: 180,
+        height: AppDimensions.sizeHeight180,
         child: Stack(
           children: [
             Align(
@@ -20,10 +21,10 @@ class HomeToCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.only(right: AppDimensions.padingRight50),
                 child: Image.asset(
                   AppImage.home_artist,
-                  height: 140,
+                  height: AppDimensions.imgHeight140,
                 ),
               ),
             ),

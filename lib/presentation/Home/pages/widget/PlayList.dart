@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
@@ -18,23 +19,25 @@ class _PlaylistState extends State<Playlist> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.padingSemetric15,
+          vertical: AppDimensions.padingSemetric20),
       child: Column(
         children: [
           Row(
             children: [
               CustomTextwiget(
                 text: 'Playlist',
-                color: context.isDarkMode ? Colors.black : Colors.white,
+                color: context.isDarkMode ?AppColor.textColorBlack:  AppColor.textColorWhite,
                 fontWeight: FontWeight.bold,
-                textFontsize: 15,
+                textFontsize:  AppDimensions.fontsize15 ,
               ),
               const Spacer(),
               CustomTextwiget(
                 text: 'See more',
-                color: context.isDarkMode ? Colors.black : Colors.white,
+                color: context.isDarkMode ?AppColor.textColorBlack:  AppColor.textColorWhite,
                 fontWeight: FontWeight.w500,
-                textFontsize: 12,
+                textFontsize:  AppDimensions.fontsize12 ,
               ),
             ],
           ),
@@ -56,10 +59,10 @@ class _PlaylistState extends State<Playlist> {
         return Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: AppDimensions.padingTo10),
               child: Container(
-                height: 40,
-                width: 40,
+                height: AppDimensions.containerHeightInHome,
+                width: AppDimensions.containerWidgetInHome,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.isDarkMode
@@ -76,13 +79,13 @@ class _PlaylistState extends State<Playlist> {
                   },
                   child: Icon(
                     Icons.play_arrow_rounded,
-                    color: context.isDarkMode ? Colors.white : Colors.black,
+                    color: context.isDarkMode ? AppColor.textColorWhite :AppColor.textColorBlack,
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              width: 20,
+              width: AppDimensions.sizeHeight20 ,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +93,7 @@ class _PlaylistState extends State<Playlist> {
                 CustomTextwiget(
                   text: song.name, // Playlist name
                   fontWeight: FontWeight.bold,
-                  textFontsize: 15,
+                  textFontsize:  AppDimensions.fontsize15 ,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),
@@ -98,7 +101,7 @@ class _PlaylistState extends State<Playlist> {
                 CustomTextwiget(
                   text: song.title, // Playlist title
                   fontWeight: FontWeight.normal,
-                  textFontsize: 12,
+                  textFontsize:  AppDimensions.fontsize12 ,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),
@@ -110,20 +113,19 @@ class _PlaylistState extends State<Playlist> {
               children: [
                 CustomTextwiget(
                   text: song.duraTion, // Duration from Playlist
-                  textFontsize: 15,
+                  textFontsize:  AppDimensions.fontsize15 ,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: AppDimensions.sizeHeight20,
                 ),
                 Consumer<Favourtieprovider>(
                   builder: (context, provider, child) {
                     return GestureDetector(
                       onTap: () {
                         provider.toggleFavourite(song);
-                       
                       },
                       child: Icon(
                         provider.isExit(song)
@@ -141,7 +143,7 @@ class _PlaylistState extends State<Playlist> {
       },
       separatorBuilder: (context, index) {
         return const SizedBox(
-          height: 20,
+          height: AppDimensions.sizeHeight20,
         );
       },
       itemCount: songs.length,

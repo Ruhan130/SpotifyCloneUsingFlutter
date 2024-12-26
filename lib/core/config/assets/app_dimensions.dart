@@ -1,5 +1,6 @@
 class AppDimensions{
   static const double fontsize18 = 18 ; 
+  static const double fontsize15 = 15 ; 
   static const double fontsize12 = 12 ; 
   static const double fontsize25 = 25 ; 
   static const double matrixTranslate10 = 10 ; 
@@ -22,7 +23,10 @@ class AppDimensions{
 
 
   static const double padingBotton10 = 10 ;
+  static const double padingTo10 = 10 ;
+  static const double padingRight50 = 50 ;
   static const double padingSemetric20 = 20 ;
+  static const double padingSemetric15 = 15 ;
   static const double padingSemetric40 = 40 ;
   static const double padingSemetric16 = 16 ;
   static const double padingLeft15 = 15 ;
@@ -34,9 +38,13 @@ class AppDimensions{
   static const double sizeHeight20 = 20 ;
   static const double sizeHeight250 = 250 ;
   static const double sizeHeight160 = 160 ;
+  static const double sizeHeight180 = 180 ;
   
   
   static const double borderR30 = 30 ;
+  
+  static const double imgHeight140 = 140 ;
+
 
 
   static const double iconSize30 = 30 ;
