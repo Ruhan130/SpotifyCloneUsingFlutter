@@ -4,8 +4,11 @@ import 'package:just_audio/just_audio.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_music.dart';
 import 'package:project/core/config/theme/app_color.dart';
+import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
+import 'package:provider/provider.dart';
 
 class SongPlayer extends StatefulWidget {
   final SongEntity songEntity;
@@ -134,13 +137,23 @@ class _SongPlayerState extends State<SongPlayer> {
             ),
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.favorite_outline_outlined,
-            size: 35,
-            color: AppColor.darkGrey,
-          ),
+        Consumer<Favourtieprovider>(
+          builder: (context, favouriteProvider, child) {
+            final isFavourite = favouriteProvider.isExit(widget.songEntity);
+            return IconButton(
+              onPressed: () {
+                // Toggle favorite logic
+                favouriteProvider.toggleFavourite(widget.songEntity);
+              },
+              icon: Icon(
+                isFavourite
+                    ? Icons.favorite // If in favorites
+                    : Icons.favorite_outline_outlined, // If not in favorites
+                size: 35,
+                color: isFavourite ? Colors.red : AppColor.darkGrey,
+              ),
+            );
+          },
         ),
       ],
     );
@@ -165,17 +178,14 @@ class _SongPlayerState extends State<SongPlayer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              
               Text(
                 formatDuration(position),
               ),
-              
               Text(currentSong.duraTion),
             ],
           ),
         ),
 
-        
         Container(
           height: 60,
           width: 60,

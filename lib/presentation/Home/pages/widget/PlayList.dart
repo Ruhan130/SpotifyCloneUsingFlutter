@@ -7,8 +7,14 @@ import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 import 'package:provider/provider.dart';
 
-class Playlist extends StatelessWidget {
+class Playlist extends StatefulWidget {
   Playlist({super.key});
+
+  @override
+  State<Playlist> createState() => _PlaylistState();
+}
+
+class _PlaylistState extends State<Playlist> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -116,10 +122,11 @@ class Playlist extends StatelessWidget {
                   builder: (context, provider, child) {
                     return GestureDetector(
                       onTap: () {
-                        Favourtieprovider.of(context).toggleFavourite(song);
+                        provider.toggleFavourite(song);
+                       
                       },
                       child: Icon(
-                        Favourtieprovider.of(context).isExit(song)
+                        provider.isExit(song)
                             ? Icons.favorite
                             : Icons.favorite_border,
                         color: AppColor.darkGrey,
