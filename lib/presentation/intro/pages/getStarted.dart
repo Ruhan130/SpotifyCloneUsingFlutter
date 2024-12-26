@@ -17,7 +17,7 @@ class GetStarted extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical:AppDimensions.padingSemetric40, horizontal:AppDimensions.padingSemetric40),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
@@ -29,7 +29,7 @@ class GetStarted extends StatelessWidget {
             color: Colors.black.withOpacity(0.15),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical:AppDimensions.padingSemetric40,horizontal:AppDimensions.padingSemetric40),
             child: Column(
                 children: [
                   Align(
@@ -44,7 +44,7 @@ class GetStarted extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(
-                    height: 21,
+                    height: AppDimensions.sizeHeight20,
                   ),
                   const CustomTextwiget(
                     text:
@@ -55,7 +55,7 @@ class GetStarted extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: AppDimensions.sizeHeight20,
                   ),
                   CustomElevatedButton(tittle: 'Get Started', onpressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ChoseModePage(),));

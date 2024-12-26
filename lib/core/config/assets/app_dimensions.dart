@@ -23,6 +23,7 @@ class AppDimensions{
 
   static const double padingBotton10 = 10 ;
   static const double padingSemetric20 = 20 ;
+  static const double padingSemetric40 = 40 ;
   static const double padingSemetric16 = 16 ;
   static const double padingLeft15 = 15 ;
 
