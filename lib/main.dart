@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project/core/config/theme/app_theme.dart';
 import 'package:project/firebase_options.dart';
+import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
 import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           darkTheme: Apptheme.darkTheme,
           themeMode: mode,
           debugShowCheckedModeBanner: false,
-          home: const SplashPage(),
+          home: const HomePage(),
         ),
       ),
     );
