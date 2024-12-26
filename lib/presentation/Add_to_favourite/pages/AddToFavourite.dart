@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 
 class AddToFavouritre extends StatefulWidget {
@@ -43,11 +44,13 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
+                          borderRadius: BorderRadius.circular(20),
+                          color:
+                              context.isDarkMode ? Colors.black : Colors.white,
+                        ),
                         child: Row(
                           children: [
                             Container(
@@ -69,16 +72,16 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
                                   text: favItem.name,
                                   textFontsize: 15,
                                   color: context.isDarkMode
-                                      ? Colors.black
-                                      : Colors.white,
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 CustomTextwiget(
                                   text: favItem.title,
                                   textFontsize: 12,
                                   color: context.isDarkMode
-                                      ? Colors.black
-                                      : Colors.white,
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ],
                             )
@@ -87,17 +90,26 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
                       ),
                     ),
                     Positioned(
-                      top: 55,
+                      top: 45,
                       right: 35,
                       child: GestureDetector(
                         onTap: () {
                           playlist.removeAt(index);
                           setState(() {});
                         },
-                        child: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                          size: 25,
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: context.isDarkMode
+                                  ? Colors.black
+                                  : AppColor.darkGrey),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                            size: 25,
+                          ),
                         ),
                       ),
                     ),

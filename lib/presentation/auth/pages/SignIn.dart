@@ -52,12 +52,14 @@ class SignIn extends StatelessWidget {
                         email: _email.text.toString(),
                         password: _password.text.toString()),
                   );
+                  
                   result.fold(
                     (l) {
                       var snackbar = SnackBar(
                         content: Text(l),
                         behavior: SnackBarBehavior.floating,
                       );
+                      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk$l");
                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                     },
                     (r) {

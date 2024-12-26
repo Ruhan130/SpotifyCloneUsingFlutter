@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage>
             },
             icon: Icon(
               Icons.favorite_border,
-              color: context.isDarkMode ? Colors.white : Colors.black,
+              color: context.isDarkMode ? Colors.black : Colors.white,
             ),
           ),
         ),
