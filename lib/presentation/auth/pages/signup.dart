@@ -135,7 +135,7 @@ class SignUp extends StatelessWidget {
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.white
               : Colors.black,
-          textFontsize: 12,
+          textFontsize: AppDimensions.fontsize15,
         ),
         const SizedBox(
           width: 10,
@@ -151,8 +151,8 @@ class SignUp extends StatelessWidget {
           child: CustomTextwiget(
             text: 'Sign in',
             color: Colors.blue[600],
-            fontWeight: FontWeight.w500,
-            textFontsize: 12,
+            fontWeight: FontWeight.bold,
+            textFontsize: AppDimensions.fontsize15,
           ),
         ),
       ],
