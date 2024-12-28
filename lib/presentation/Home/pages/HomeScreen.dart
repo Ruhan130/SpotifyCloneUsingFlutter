@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       drawer: Drawer(
+        shape: LinearBorder(),
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -58,40 +59,38 @@ class _HomePageState extends State<HomePage>
               title: InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const AddToFavouritre()) // Remove all previous routes
-                      );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddToFavouritre(),
+                    ),
+                  );
                 },
                 child: CustomTextwiget(
                   text: 'FAVOURITE',
                   color: context.isDarkMode
                       ? AppColor.textColorBlack
                       : AppColor.textColorWhite,
-                  textFontsize: AppDimensions.fontsize18,
+                  textFontsize: AppDimensions.fontsize15,
                 ),
               ),
             ),
           ),
           const Spacer(),
           Padding(
-            padding: EdgeInsets.only(left: 20, bottom: 30),
+            padding: const EdgeInsets.only(left: 20, bottom: 30),
             child: Center(
               child: InkWell(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CustomTextwiget(
-                      text: 'Logout',
-                      textFontsize: AppDimensions.fontsize18,
+                      text: 'LOGOUT',
+                      textFontsize: AppDimensions.fontsize15,
                       color: context.isDarkMode
                           ? AppColor.textColorBlack
                           : AppColor.textColorWhite,
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    Spacer(),
                     IconButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
@@ -116,8 +115,7 @@ class _HomePageState extends State<HomePage>
       )),
       body: SingleChildScrollView(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
               padding: EdgeInsets.only(bottom: AppDimensions.padingBotton10),
@@ -125,18 +123,13 @@ class _HomePageState extends State<HomePage>
             ),
             const SizedBox(height: AppDimensions.sizeHeight10),
             _NewText(context),
-
-            // _tabs(context),
-
             const SizedBox(
-              height: AppDimensions.sizeHeight20,
+              height: AppDimensions.sizeHeight10,
             ),
-            // Add a specific height or other constraints to the ListView
             SizedBox(
-              height: AppDimensions.sizeHeight250, // Explicit height
+              height: 250,
               child: _NewRow(songList),
             ),
-
             Playlist(),
           ],
         ),
@@ -145,13 +138,16 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _NewText(BuildContext context) {
-    return CustomTextwiget(
-      text: 'New Songs',
-      textFontsize: AppDimensions.fontsize18,
-      color: context.isDarkMode
-          ? AppColor.textColorBlack
-          : AppColor.textColorWhite,
-      fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: CustomTextwiget(
+        text: 'New Songs',
+        textFontsize: AppDimensions.fontsize15,
+        color: context.isDarkMode
+            ? AppColor.textColorBlack
+            : AppColor.textColorWhite,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
   // Widget _tabs(BuildContext context) {

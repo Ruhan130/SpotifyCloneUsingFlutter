@@ -18,33 +18,29 @@ class Playlist extends StatefulWidget {
 class _PlaylistState extends State<Playlist> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.padingSemetric15,
-          vertical: AppDimensions.padingSemetric20),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CustomTextwiget(
-                text: 'Playlist',
-                color: context.isDarkMode ?AppColor.textColorBlack:  AppColor.textColorWhite,
-                fontWeight: FontWeight.bold,
-                textFontsize:  AppDimensions.fontsize15 ,
-              ),
-              const Spacer(),
-              CustomTextwiget(
-                text: 'See more',
-                color: context.isDarkMode ?AppColor.textColorBlack:  AppColor.textColorWhite,
-                fontWeight: FontWeight.w500,
-                textFontsize:  AppDimensions.fontsize12 ,
-              ),
-            ],
-          ),
-          SizedBox(
-              height: MediaQuery.sizeOf(context).height,
-              child: _playList(songList))
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.padingSemetric15,
+            vertical: AppDimensions.padingSemetric20),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CustomTextwiget(
+                  text: 'Playlist',
+                  color: context.isDarkMode
+                      ? AppColor.textColorBlack
+                      : AppColor.textColorWhite,
+                  fontWeight: FontWeight.bold,
+                  textFontsize: AppDimensions.fontsize15,
+                ),
+                const Spacer(),
+              ],
+            ),
+            _playList(songList)
+          ],
+        ),
       ),
     );
   }
@@ -55,7 +51,7 @@ class _PlaylistState extends State<Playlist> {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final song = songs[index]; // Fetching Playlist object
+        final song = songs[index];
         return Row(
           children: [
             Padding(
@@ -79,13 +75,15 @@ class _PlaylistState extends State<Playlist> {
                   },
                   child: Icon(
                     Icons.play_arrow_rounded,
-                    color: context.isDarkMode ? AppColor.textColorWhite :AppColor.textColorBlack,
+                    color: context.isDarkMode
+                        ? AppColor.textColorWhite
+                        : AppColor.textColorBlack,
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              width: AppDimensions.sizeHeight20 ,
+              width: AppDimensions.sizeHeight20,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +91,7 @@ class _PlaylistState extends State<Playlist> {
                 CustomTextwiget(
                   text: song.name, // Playlist name
                   fontWeight: FontWeight.bold,
-                  textFontsize:  AppDimensions.fontsize15 ,
+                  textFontsize: AppDimensions.fontsize15,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),
@@ -101,7 +99,7 @@ class _PlaylistState extends State<Playlist> {
                 CustomTextwiget(
                   text: song.title, // Playlist title
                   fontWeight: FontWeight.normal,
-                  textFontsize:  AppDimensions.fontsize12 ,
+                  textFontsize: AppDimensions.fontsize12,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),
@@ -113,7 +111,7 @@ class _PlaylistState extends State<Playlist> {
               children: [
                 CustomTextwiget(
                   text: song.duraTion, // Duration from Playlist
-                  textFontsize:  AppDimensions.fontsize15 ,
+                  textFontsize: AppDimensions.fontsize15,
                   color: context.isDarkMode
                       ? AppColor.darkGrey
                       : const Color(0xffE6E6E6),

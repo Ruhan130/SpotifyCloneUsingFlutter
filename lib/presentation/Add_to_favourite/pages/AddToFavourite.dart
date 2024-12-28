@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
-import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 
 class AddToFavouritre extends StatefulWidget {
