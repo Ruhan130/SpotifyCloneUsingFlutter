@@ -11,13 +11,13 @@ class Apptheme {
       fillColor: Colors.transparent,
       hintStyle: const TextStyle(
           color: Color(0xff383838), fontWeight: FontWeight.w500),
-      contentPadding: const EdgeInsets.all(30),
+      contentPadding: const EdgeInsets.all(25),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(color: Colors.black, width: 0.4),
       ),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Colors.black, width: 0.4)),
     ),
     scaffoldBackgroundColor: AppColor.lightBackground,
@@ -26,7 +26,7 @@ class Apptheme {
       backgroundColor: AppColor.primary,
       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(25),
       ),
     )),
   );
@@ -40,13 +40,13 @@ class Apptheme {
       fillColor: Colors.transparent,
       hintStyle: const TextStyle(
           color: Color(0xffA7A7A7), fontWeight: FontWeight.w500),
-      contentPadding: const EdgeInsets.all(30),
+      contentPadding: const EdgeInsets.all(25),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(color: Colors.white, width: 0.4),
       ),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Colors.white, width: 0.4)),
     ),
     scaffoldBackgroundColor: AppColor.darkBackground,
@@ -55,7 +55,7 @@ class Apptheme {
         backgroundColor: AppColor.primary,
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(25),
         ),
       ),
     ),
