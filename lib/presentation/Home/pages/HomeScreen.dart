@@ -22,12 +22,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  // late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    // _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -68,6 +68,7 @@ class _HomePageState extends State<HomePage>
       ),
       body: SingleChildScrollView(
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
