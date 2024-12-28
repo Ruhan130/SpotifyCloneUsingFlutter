@@ -40,7 +40,7 @@ class Apptheme {
       fillColor: Colors.transparent,
       hintStyle: const TextStyle(
           color: Color(0xffA7A7A7), fontWeight: FontWeight.w500),
-      contentPadding: const EdgeInsets.all(25),
+      contentPadding: const EdgeInsets.all(20),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(color: Colors.white, width: 0.4),

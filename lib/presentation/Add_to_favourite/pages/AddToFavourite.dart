@@ -20,7 +20,6 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
     return Scaffold(
       appBar: const BasicAppbar(
         isHide: false,
-        
         tittle: Text('Favourite'),
       ),
       body: Column(
@@ -91,26 +90,17 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
                       ),
                     ),
                     Positioned(
-                      top: 45,
-                      right: 35,
+                      top: 55,
+                      right: 40,
                       child: GestureDetector(
                         onTap: () {
                           playlist.removeAt(index);
                           setState(() {});
                         },
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: context.isDarkMode
-                                  ? Colors.black
-                                  : AppColor.darkGrey),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                            size: 25,
-                          ),
+                        child: Icon(
+                          Icons.remove_circle_outline_outlined,
+                          color: Colors.red,
+                          size: 25,
                         ),
                       ),
                     ),
