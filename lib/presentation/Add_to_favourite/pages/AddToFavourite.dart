@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
-import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 
 class AddToFavouritre extends StatefulWidget {
@@ -19,7 +18,7 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
     final playlist = provider.favourite;
     return Scaffold(
       appBar: const BasicAppbar(
-        isHide: true,
+        isHide: false,
         tittle: Text('Favourite'),
       ),
       body: Column(
@@ -90,26 +89,17 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
                       ),
                     ),
                     Positioned(
-                      top: 45,
-                      right: 35,
+                      top: 55,
+                      right: 40,
                       child: GestureDetector(
                         onTap: () {
                           playlist.removeAt(index);
                           setState(() {});
                         },
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: context.isDarkMode
-                                  ? Colors.black
-                                  : AppColor.darkGrey),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                            size: 25,
-                          ),
+                        child: Icon(
+                          Icons.remove_circle_outline_outlined,
+                          color: Colors.red,
+                          size: 25,
                         ),
                       ),
                     ),

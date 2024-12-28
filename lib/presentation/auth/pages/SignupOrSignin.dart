@@ -23,9 +23,10 @@ class _SignUpOrSignInState extends State<SignUpOrSignIn> {
     return Scaffold(
       backgroundColor:
           Theme.of(context).scaffoldBackgroundColor, // Dynamic background
+          appBar:  const BasicAppbar(isHide: false,),
       body: Stack(
         children: [
-          const BasicAppbar(),
+         
           Align(
             alignment: Alignment.topRight,
             child: SvgPicture.asset(AppVectors.topPattern),

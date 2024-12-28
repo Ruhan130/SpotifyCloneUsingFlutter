@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:project/common/widgets/Basic_appbar.dart';
 import 'package:project/common/widgets/customElevatedButton.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
+import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/data/models/auth/signin_user.dart';
 import 'package:project/domain/usecases/auth/signin.dart';
@@ -18,8 +19,9 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: _signUpText(context),
+      bottomNavigationBar: SizedBox(height: 60,child: _signUpText(context)),
       appBar: BasicAppbar(
+        isHide: false,
         tittle: SvgPicture.asset(
           AppVectors.logo,
           height: 40,
@@ -123,7 +125,7 @@ class SignIn extends StatelessWidget {
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.white
               : Colors.black,
-          textFontsize: 12,
+          textFontsize: AppDimensions.fontsize18,
         ),
         const SizedBox(
           width: 10,
@@ -139,8 +141,8 @@ class SignIn extends StatelessWidget {
           child: CustomTextwiget(
             text: 'Register Now',
             color: Colors.blue[600],
-            fontWeight: FontWeight.w500,
-            textFontsize: 12,
+            fontWeight: FontWeight.bold,
+            textFontsize: AppDimensions.fontsize18,
           ),
         ),
       ],

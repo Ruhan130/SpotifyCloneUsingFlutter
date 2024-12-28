@@ -50,4 +50,16 @@ final List<SongEntity> songList = [
       title: "Lana Del Rey",
       image: AppImage.lana_del_rey1,
       audio: AppMusic.say_yes_to_heaven_LANADELRAy,  duraTion: '3:27'),
+
+       SongEntity(
+      name: "Perfect",
+      title: "Ed Sheeran",
+      image: AppImage.ed_sheeran,
+      audio: AppMusic.perfect_ed_sheeran, duraTion: '4:23'),
+  SongEntity(
+      name: "To Heaven",
+      title: "Lana Del Rey",
+      image: AppImage.lana_del_rey1,
+      audio: AppMusic.say_yes_to_heaven_LANADELRAy,  duraTion: '3:27'),
+      
 ];

@@ -18,8 +18,9 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: _signInText(context),
+      bottomNavigationBar: SizedBox( height: 60,child: _signInText(context)),
       appBar: BasicAppbar(
+        isHide: false,
         tittle: SvgPicture.asset(
           AppVectors.logo,
           height: AppDimensions.WeightLogoInHome,
@@ -135,7 +136,7 @@ class SignUp extends StatelessWidget {
           color: Theme.of(context).brightness == Brightness.dark
               ? Colors.white
               : Colors.black,
-          textFontsize: 12,
+          textFontsize: AppDimensions.fontsize18,
         ),
         const SizedBox(
           width: 10,
@@ -151,8 +152,8 @@ class SignUp extends StatelessWidget {
           child: CustomTextwiget(
             text: 'Sign in',
             color: Colors.blue[600],
-            fontWeight: FontWeight.w500,
-            textFontsize: 12,
+            fontWeight: FontWeight.bold,
+            textFontsize: AppDimensions.fontsize18,
           ),
         ),
       ],
