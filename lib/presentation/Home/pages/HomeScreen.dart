@@ -10,6 +10,7 @@ import 'package:project/presentation/Add_to_favourite/pages/AddToFavourite.dart'
 import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
+import 'package:project/presentation/auth/pages/SignIn.dart';
 // import 'package:project/presentation/profile/profile.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 
@@ -34,38 +35,85 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicAppbar(
-        isHide: false,
+        isHide: true,
         tittle: SvgPicture.asset(
           AppVectors.logo,
           height: AppDimensions.heightLogoInHome,
           width: AppDimensions.WeightLogoInHome,
         ),
-        action: Container(
-          height: AppDimensions.containerHeightInHome,
-          width: AppDimensions.containerHeightInHome,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: context.isDarkMode
-                ? AppColor.textColorBlack
-                : AppColor.darkGrey,
-          ),
-          child: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddToFavouritre(),
-                  ));
-            },
-            icon: Icon(
-              Icons.favorite_border,
-              color: context.isDarkMode
-                  ? AppColor.textColorBlack
-                  : AppColor.textColorWhite,
+      ),
+      drawer: Drawer(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+            child: ListTile(
+              leading: Icon(
+                Icons.favorite_outline,
+                color: context.isDarkMode
+                    ? AppColor.textColorBlack
+                    : AppColor.textColorWhite,
+              ),
+              title: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const AddToFavouritre()) // Remove all previous routes
+                      );
+                },
+                child: CustomTextwiget(
+                  text: 'FAVOURITE',
+                  color: context.isDarkMode
+                      ? AppColor.textColorBlack
+                      : AppColor.textColorWhite,
+                  textFontsize: AppDimensions.fontsize18,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+          const Spacer(),
+          Padding(
+            padding: EdgeInsets.only(left: 20, bottom: 30),
+            child: Center(
+              child: InkWell(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextwiget(
+                      text: 'Logout',
+                      textFontsize: AppDimensions.fontsize18,
+                      color: context.isDarkMode
+                          ? AppColor.textColorBlack
+                          : AppColor.textColorWhite,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignIn()),
+                          (route) => false,
+                        );
+                      },
+                      icon: Icon(
+                        Icons.logout_outlined,
+                        color: context.isDarkMode
+                            ? AppColor.textColorBlack
+                            : AppColor.textColorWhite,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      )),
       body: SingleChildScrollView(
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +151,7 @@ class _HomePageState extends State<HomePage>
       color: context.isDarkMode
           ? AppColor.textColorBlack
           : AppColor.textColorWhite,
-          fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.bold,
     );
   }
   // Widget _tabs(BuildContext context) {

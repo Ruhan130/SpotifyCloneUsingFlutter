@@ -20,6 +20,7 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: _signInText(context),
       appBar: BasicAppbar(
+        isHide: false,
         tittle: SvgPicture.asset(
           AppVectors.logo,
           height: AppDimensions.WeightLogoInHome,

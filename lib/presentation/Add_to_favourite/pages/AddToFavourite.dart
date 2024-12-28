@@ -19,7 +19,8 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
     final playlist = provider.favourite;
     return Scaffold(
       appBar: const BasicAppbar(
-        isHide: true,
+        isHide: false,
+        
         tittle: Text('Favourite'),
       ),
       body: Column(
