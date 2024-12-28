@@ -77,15 +77,7 @@ class _SongPlayerState extends State<SongPlayer> {
               ? AppColor.textColorBlack
               : AppColor.textColorWhite,
         ),
-        action: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.more_vert_rounded,
-            color: context.isDarkMode
-                ? AppColor.textColorBlack
-                : AppColor.textColorWhite,
-          ),
-        ),
+     
       ),
       body: SingleChildScrollView(
         child: Padding(
