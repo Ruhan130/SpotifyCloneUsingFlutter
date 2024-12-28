@@ -75,8 +75,9 @@ class _HomePageState extends State<HomePage>
               child: HomeToCard(),
             ),
             const SizedBox(height: AppDimensions.sizeHeight10),
+            _NewText(context),
 
-            _tabs(context),
+            // _tabs(context),
 
             const SizedBox(
               height: AppDimensions.sizeHeight20,
@@ -94,38 +95,48 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _tabs(BuildContext context) {
-    return Center(
-      child: TabBar(
-        controller: _tabController,
-        indicatorColor: AppColor.primary,
-        indicatorSize: TabBarIndicatorSize.label,
-        dividerColor: Colors.transparent,
-        isScrollable: true,
-        labelColor: context.isDarkMode
-            ? AppColor.textColorBlack
-            : AppColor.textColorWhite,
-        tabs: const [
-          CustomTextwiget(
-              text: 'New',
-              fontWeight: FontWeight.w500,
-              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
-          CustomTextwiget(
-              text: 'Videos',
-              fontWeight: FontWeight.w500,
-              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
-          CustomTextwiget(
-              text: 'Artist',
-              fontWeight: FontWeight.w500,
-              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
-          CustomTextwiget(
-              text: 'Podcasts',
-              fontWeight: FontWeight.w500,
-              textFontsize: AppDimensions.homeSizeForTabHomeScreen),
-        ],
-      ),
+  Widget _NewText(BuildContext context) {
+    return CustomTextwiget(
+      text: 'New Songs',
+      textFontsize: AppDimensions.fontsize18,
+      color: context.isDarkMode
+          ? AppColor.textColorBlack
+          : AppColor.textColorWhite,
+          fontWeight: FontWeight.bold,
     );
   }
+  // Widget _tabs(BuildContext context) {
+  //   return Center(
+  //     child: TabBar(
+  //       controller: _tabController,
+  //       indicatorColor: AppColor.primary,
+  //       indicatorSize: TabBarIndicatorSize.label,
+  //       dividerColor: Colors.transparent,
+  //       isScrollable: true,
+  //       labelColor: context.isDarkMode
+  //           ? AppColor.textColorBlack
+  //           : AppColor.textColorWhite,
+  //       tabs: const [
+  //         CustomTextwiget(
+  //             text: 'New',
+  //             fontWeight: FontWeight.w500,
+  //             textFontsize: AppDimensions.homeSizeForTabHomeScreen),
+  //         CustomTextwiget(
+  //             text: 'Videos',
+  //             fontWeight: FontWeight.w500,
+  //             textFontsize: AppDimensions.homeSizeForTabHomeScreen),
+  //         CustomTextwiget(
+  //             text: 'Artist',
+  //             fontWeight: FontWeight.w500,
+  //             textFontsize: AppDimensions.homeSizeForTabHomeScreen),
+  //         CustomTextwiget(
+  //             text: 'Podcasts',
+  //             fontWeight: FontWeight.w500,
+  //             textFontsize: AppDimensions.homeSizeForTabHomeScreen),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   // ignore: non_constant_identifier_names
   Widget _NewRow(List<SongEntity> songs) {
