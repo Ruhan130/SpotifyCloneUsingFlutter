@@ -131,8 +131,8 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
               ],
             ),
           ),
-         
-          Spacer(), // Dynamically adjust space between widgets
+
+          const Spacer(), // Dynamically adjust space between widgets
           Container(
             margin: EdgeInsets.only(top: 5),
             height: AppDimensions.containerHeight35,
