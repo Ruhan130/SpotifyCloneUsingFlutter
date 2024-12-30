@@ -63,7 +63,7 @@ class _PlaylistState extends State<Playlist> {
                 const Spacer(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             _playList(songList)
@@ -80,22 +80,21 @@ class _PlaylistState extends State<Playlist> {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final song = songs[index];
-        final isCurrentSongPlaying = currentSong == song && isPlaying;
         return Row(
           children: [
             Consumer<AudioPlayerProvider>(
               builder: (context, audioProvider, child) {
                 return GestureDetector(
                   onTap: () {
-                    audioProvider
-                        .play(song); // Trigger play for the clicked song
+                    audioProvider.play(song); // Play the song when tapped
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
                     ).then((_) {
-                      audioProvider.stop(); // Stop playback when modal closes
+                      audioProvider.stop(); // Stop the song when modal closes
                     });
                   },
+                  
                   child: Icon(
                     audioProvider.isPlaying && audioProvider.currentSong == song
                         ? Icons.pause

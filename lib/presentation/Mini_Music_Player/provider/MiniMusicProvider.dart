@@ -1,30 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
-// import 'song_entity.dart';
+
 
 class AudioPlayerProvider with ChangeNotifier {
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
+  Duration _position = Duration.zero;
+  Duration _duration = Duration.zero;
   SongEntity? _currentSong;
 
   bool get isPlaying => _isPlaying;
+  Duration get position => _position;
+  Duration get duration => _duration;
   SongEntity? get currentSong => _currentSong;
 
-  Future<void> play(SongEntity song) async {
-    try {
-      // Stop current song if playing
-      if (_currentSong != null && _isPlaying) {
-        await _audioPlayer.stop();
-      }
+  AudioPlayer get audioPlayer => _audioPlayer;
 
-      _currentSong = song;
-      await _audioPlayer.setAsset(song.audio); // Load the song asset
+  AudioPlayerProvider() {
+    // Listening to the position stream
+    _audioPlayer.positionStream.listen((p) {
+      _position = p;
+      notifyListeners();
+    });
+
+    // Listening to the duration stream
+    _audioPlayer.durationStream.listen((d) {
+      _duration = d ?? Duration.zero;
+      notifyListeners();
+    });
+  }
+
+  Future<void> play(SongEntity song) async {
+    if (_currentSong != song) {
+      await _audioPlayer.setAsset(song.audio); // Load new song
+    }
+
+    if (!_isPlaying) {
       await _audioPlayer.play();
       _isPlaying = true;
+      _currentSong = song;
       notifyListeners();
-    } catch (e) {
-      debugPrint("Error playing song: $e");
     }
   }
 
@@ -39,5 +55,9 @@ class AudioPlayerProvider with ChangeNotifier {
     _isPlaying = false;
     _currentSong = null;
     notifyListeners();
+  }
+
+  Future<void> seek(Duration position) async {
+    await _audioPlayer.seek(position);
   }
 }

@@ -239,6 +239,7 @@ class _HomePageState extends State<HomePage>
                               : AppColor.textColorBlack,
                         ),
                       ),
+                      
                     ),
                   ),
                   CustomTextwiget(
