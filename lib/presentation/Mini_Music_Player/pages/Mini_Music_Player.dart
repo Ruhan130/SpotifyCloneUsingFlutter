@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class MiniMusicPlayer extends StatefulWidget {
   final SongEntity songEntity;
+  
 
   const MiniMusicPlayer({super.key, required this.songEntity});
 
