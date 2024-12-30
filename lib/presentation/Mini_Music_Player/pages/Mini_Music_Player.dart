@@ -63,8 +63,10 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return SizedBox(
+      height: 125,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +81,7 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
                 _songDetail(context, songList)
               ],
             ),
-            
+            _songPlayer(context, songList)
           ],
         ),
       ),
@@ -101,48 +103,84 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
   }
 
   Widget _songDetail(BuildContext context, List<SongEntity> songs) {
-    return Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextwiget(
-              text: widget.songEntity.name, // Accessing song.name
-              color: context.isDarkMode
-                  ? AppColor.textColorBlack
-                  : AppColor.textColorWhite,
-              fontWeight: FontWeight.bold,
-              textFontsize: AppDimensions.fontsize15,
+    return Expanded(
+      // width: MediaQuery.of(context).size.width, // Full screen width
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Column with song details
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomTextwiget(
+                  text: widget.songEntity.name,
+                  color: context.isDarkMode
+                      ? AppColor.textColorBlack
+                      : AppColor.textColorWhite,
+                  fontWeight: FontWeight.bold,
+                  textFontsize: AppDimensions.fontsize15,
+                ),
+                CustomTextwiget(
+                  text: widget.songEntity.title,
+                  color: context.isDarkMode
+                      ? AppColor.textColorBlack
+                      : AppColor.textColorWhite,
+                  textFontsize: AppDimensions.fontsize10,
+                ),
+              ],
             ),
-            CustomTextwiget(
-              text: widget.songEntity.title, // Accessing song.title
-              color: context.isDarkMode
-                  ? AppColor.textColorBlack
-                  : AppColor.textColorWhite,
-              textFontsize: AppDimensions.fontsize10,
-            ),
-          ],
-        ),
-        const SizedBox(width: 120,),
-        Consumer<Favourtieprovider>(
-          builder: (context, favouriteProvider, child) {
-            final isFavourite = favouriteProvider.isExit(widget.songEntity);
-            return IconButton(
-              onPressed: () {
-                // Toggle favorite logic
-                favouriteProvider.toggleFavourite(widget.songEntity);
-              },
+          ),
+         
+          Spacer(), // Dynamically adjust space between widgets
+          Container(
+            margin: EdgeInsets.only(top: 5),
+            height: AppDimensions.containerHeight35,
+            width: AppDimensions.containerWidget35,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: AppColor.primary),
+            child: IconButton(
+              onPressed: handlePlayPause,
               icon: Icon(
-                isFavourite
-                    ? Icons.play_arrow // If in favorites
-                    : Icons.pause, // If not in favorites
-                size: 35,
-                color: isFavourite ? AppColor.redColor : AppColor.darkGrey,
+                audioPlayer.playing ? Icons.pause : Icons.play_arrow,
+                color: context.isDarkMode
+                    ? AppColor.textColorBlack
+                    : AppColor.textColorWhite,
+                size: AppDimensions.fontsize20,
               ),
-            );
-          },
-        ),
-      ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _songPlayer(BuildContext context, List<SongEntity> songList) {
+    SongEntity currentSong = songList[0];
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            formatDuration(position),
+          ),
+          // Slider for audio position
+          Expanded(
+            child: Slider(
+              activeColor: context.isDarkMode
+                  ? AppColor.textColorBlack
+                  : AppColor.textColorWhite,
+              max: duration.inSeconds.toDouble(),
+              min: 0.0,
+              value: position.inSeconds.toDouble(),
+              onChanged: handleSeek,
+            ),
+          ),
+
+          Text(currentSong.duraTion),
+        ],
+      ),
     );
   }
 }
