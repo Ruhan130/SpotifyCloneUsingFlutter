@@ -4,13 +4,10 @@ import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/theme/app_color.dart';
-import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
-import 'package:provider/provider.dart';
 
 class MiniMusicPlayer extends StatefulWidget {
   final SongEntity songEntity;
-  
 
   const MiniMusicPlayer({super.key, required this.songEntity});
 
@@ -132,10 +129,10 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
               ],
             ),
           ),
-
-          const Spacer(), // Dynamically adjust space between widgets
+         
+          const Spacer(), 
           Container(
-            margin: EdgeInsets.only(top: 5),
+            margin: const EdgeInsets.only(top: 5),
             height: AppDimensions.containerHeight35,
             width: AppDimensions.containerWidget35,
             decoration: const BoxDecoration(
