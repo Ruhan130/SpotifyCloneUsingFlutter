@@ -27,7 +27,7 @@ class _AddToFavouritreState extends State<AddToFavouritre> {
           Padding(
             padding: EdgeInsets.only(top: 10, left: 30),
             child: CustomTextwiget(
-              text: 'Public PlayList',
+              text: 'Favourite PlayList',
               textFontsize: 20,
               fontWeight: FontWeight.bold,
               color: context.isDarkMode ? Colors.black : Colors.white,
