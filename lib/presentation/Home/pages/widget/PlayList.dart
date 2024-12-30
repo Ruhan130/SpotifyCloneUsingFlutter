@@ -5,11 +5,12 @@ import 'package:project/core/config/assets/app_dimensions.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/model/new_songsection.dart';
+import 'package:project/presentation/Mini_Music_Player/pages/Mini_Music_Player.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 import 'package:provider/provider.dart';
 
 class Playlist extends StatefulWidget {
-  Playlist({super.key});
+  Playlist({super.key, });
 
   @override
   State<Playlist> createState() => _PlaylistState();
@@ -67,11 +68,10 @@ class _PlaylistState extends State<Playlist> {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SongPlayer(songEntity: song),
-                        ));
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => MiniMusicPlayer(songEntity: song,)
+                    );
                   },
                   child: Icon(
                     Icons.play_arrow_rounded,
@@ -88,13 +88,22 @@ class _PlaylistState extends State<Playlist> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomTextwiget(
-                  text: song.name, // Playlist name
-                  fontWeight: FontWeight.bold,
-                  textFontsize: AppDimensions.fontsize15,
-                  color: context.isDarkMode
-                      ? AppColor.darkGrey
-                      : const Color(0xffE6E6E6),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SongPlayer(songEntity: song),
+                        ));
+                  },
+                  child: CustomTextwiget(
+                    text: song.name, // Playlist name
+                    fontWeight: FontWeight.bold,
+                    textFontsize: AppDimensions.fontsize15,
+                    color: context.isDarkMode
+                        ? AppColor.darkGrey
+                        : const Color(0xffE6E6E6),
+                  ),
                 ),
                 CustomTextwiget(
                   text: song.title, // Playlist title

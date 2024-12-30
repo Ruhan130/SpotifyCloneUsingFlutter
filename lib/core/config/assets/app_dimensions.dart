@@ -3,6 +3,7 @@ class AppDimensions{
   static const double fontsize15 = 15 ; 
   static const double fontsize26 = 26 ; 
   static const double fontsize12 = 12 ; 
+  static const double fontsize10 = 10 ; 
   static const double fontsize25 = 25 ; 
   static const double matrixTranslate10 = 10 ; 
   static const double matrixTranslate0 = 0 ; 
@@ -42,6 +43,7 @@ class AppDimensions{
   static const double sizeHeight160 = 160 ;
   static const double sizeHeight180 = 180 ;
   
+  static const double sizeWidget15 = 15 ;
   
   static const double borderR30 = 30 ;
   
