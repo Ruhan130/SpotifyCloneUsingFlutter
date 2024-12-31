@@ -96,12 +96,14 @@ class _PlaylistState extends State<Playlist> {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
-                    ).whenComplete(() {
-                      audioProvider
-                          .stop(); // Modal close hone ke baad song ko stop karo.
-                    });
+                    ).whenComplete(
+                      () {
+                        audioProvider.stop();
+                      },
+                    );
                   },
-                  child: Icon(Icons.play_arrow), // UI ko aise hi chhod do.
+                  child:
+                      const Icon(Icons.play_arrow), // UI ko aise hi chhod do.
                 );
               },
             ),

@@ -72,25 +72,16 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
             ),
           ],
         ),
-        Spacer(),
-        Consumer<AudioPlayerProvider>(
-          builder: (context, audioProvider, child) {
+        const Spacer(),
+        Selector<AudioPlayerProvider, bool>(
+          selector: (context, audioProvider) => audioProvider.isMiniPlaying,
+          builder: (context, isMiniPlaying, child) {
             return IconButton(
               icon: Icon(
-                audioProvider.isPlaying &&
-                        audioProvider.currentSong == widget.songEntity
-                    ? Icons.pause
-                    : Icons.play_arrow,
+                isMiniPlaying ? Icons.pause : Icons.play_arrow,
               ),
-              onPressed: () {
-                if (audioProvider.isPlaying &&
-                    audioProvider.currentSong == widget.songEntity) {
-                  audioProvider.pause(); // Agar chal raha hai, toh pause karo.
-                } else {
-                  audioProvider.play(
-                      widget.songEntity); // Agar paused hai, toh play karo.
-                }
-              },
+              onPressed: () =>
+                  context.read<AudioPlayerProvider>().handlePlayPause(),
             );
           },
         ),
