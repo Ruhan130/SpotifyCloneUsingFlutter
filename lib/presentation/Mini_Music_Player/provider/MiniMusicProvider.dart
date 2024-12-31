@@ -18,13 +18,11 @@ class AudioPlayerProvider with ChangeNotifier {
   AudioPlayer get audioPlayer => _audioPlayer;
 
   AudioPlayerProvider() {
-    // Listening to the position stream
     _audioPlayer.positionStream.listen((p) {
       _position = p;
       notifyListeners();
     });
 
-    // Listening to the duration stream
     _audioPlayer.durationStream.listen((d) {
       _duration = d ?? Duration.zero;
       notifyListeners();
@@ -33,7 +31,7 @@ class AudioPlayerProvider with ChangeNotifier {
 
   Future<void> play(SongEntity song) async {
     if (_currentSong != song) {
-      await _audioPlayer.setAsset(song.audio); // Load new song
+      await _audioPlayer.setAsset(song.audio);
     }
 
     if (!_isPlaying) {

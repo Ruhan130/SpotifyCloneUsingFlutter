@@ -53,6 +53,7 @@ class AppDimensions{
   static const double sizeWidget15 = 15 ;
   
   static const double borderR30 = 30 ;
+  static const double borderR220 = 200 ;
   
   static const double imgHeight140 = 140 ;
 

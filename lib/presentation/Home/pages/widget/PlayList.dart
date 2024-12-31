@@ -19,6 +19,7 @@ class Playlist extends StatefulWidget {
 }
 
 class _PlaylistState extends State<Playlist> {
+  bool iconChange = false;
   final audioPlayer = AudioPlayer();
   SongEntity? currentSong; // To track the current song
   bool isPlaying = false;
@@ -86,20 +87,21 @@ class _PlaylistState extends State<Playlist> {
               builder: (context, audioProvider, child) {
                 return GestureDetector(
                   onTap: () {
-                    audioProvider.play(song); // Play the song when tapped
+                    if (!audioProvider.isPlaying ||
+                        audioProvider.currentSong != song) {
+                      audioProvider
+                          .play(song); // Song ko play karo agar nahi chal raha.
+                    }
+
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
-                    ).then((_) {
-                      audioProvider.stop(); // Stop the song when modal closes
+                    ).whenComplete(() {
+                      audioProvider
+                          .stop(); // Modal close hone ke baad song ko stop karo.
                     });
                   },
-                  
-                  child: Icon(
-                    audioProvider.isPlaying && audioProvider.currentSong == song
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                  ),
+                  child: Icon(Icons.play_arrow), // UI ko aise hi chhod do.
                 );
               },
             ),

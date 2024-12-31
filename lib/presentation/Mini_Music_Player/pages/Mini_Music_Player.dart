@@ -30,16 +30,6 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
               children: [
                 _songs(context),
 
-                // IconButton(
-                //   icon: Icon(audioProvider.isPlaying ? Icons.pause : Icons.play_arrow),
-                //   onPressed: () {
-                //     if (audioProvider.isPlaying) {
-                //       audioProvider.pause(); // Pause song
-                //     } else {
-                //       audioProvider.play(widget.songEntity); // Play song
-                //     }
-                //   },
-                // ),
                 // Song Duration Slider
                 _songPlayer(context, audioProvider),
               ],
@@ -54,17 +44,17 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
     return Row(
       children: [
         Container(
-          height: 60,
-          width: 60,
+          height: AppDimensions.containerHeightWeight60,
+          width: AppDimensions.containerHeightWeight60,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(AppDimensions.borderR30),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
+            borderRadius: BorderRadius.circular(AppDimensions.borderR220),
             child: Image.asset(widget.songEntity.image),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Column(
@@ -79,9 +69,31 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
               text: widget.songEntity.name,
               textFontsize: AppDimensions.fontsize12,
               fontWeight: FontWeight.w500,
-            )
+            ),
           ],
-        )
+        ),
+        Spacer(),
+        Consumer<AudioPlayerProvider>(
+          builder: (context, audioProvider, child) {
+            return IconButton(
+              icon: Icon(
+                audioProvider.isPlaying &&
+                        audioProvider.currentSong == widget.songEntity
+                    ? Icons.pause
+                    : Icons.play_arrow,
+              ),
+              onPressed: () {
+                if (audioProvider.isPlaying &&
+                    audioProvider.currentSong == widget.songEntity) {
+                  audioProvider.pause(); // Agar chal raha hai, toh pause karo.
+                } else {
+                  audioProvider.play(
+                      widget.songEntity); // Agar paused hai, toh play karo.
+                }
+              },
+            );
+          },
+        ),
       ],
     );
   }
@@ -93,7 +105,6 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(formatDuration(audioProvider.position)),
-          // Slider for audio position
           Expanded(
             child: Slider(
               activeColor: context.isDarkMode ? Colors.black : Colors.white,
