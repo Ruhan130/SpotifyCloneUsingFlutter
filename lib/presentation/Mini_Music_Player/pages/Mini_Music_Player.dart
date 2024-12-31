@@ -78,7 +78,7 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
           builder: (context, isMiniPlaying, child) {
             return IconButton(
               icon: Icon(
-                isMiniPlaying ? Icons.pause : Icons.play_arrow,
+                isMiniPlaying ? Icons.play_arrow : Icons.pause,
               ),
               onPressed: () =>
                   context.read<AudioPlayerProvider>().handlePlayPause(),
