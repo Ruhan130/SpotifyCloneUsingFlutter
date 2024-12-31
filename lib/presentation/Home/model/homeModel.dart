@@ -22,7 +22,6 @@ class Homemodel {
       body: json['body'],    // No need to assign a default value, just accept null
     );
   }
-
   // Method to convert object to map
   Map<String, dynamic> toMap() {
     return {

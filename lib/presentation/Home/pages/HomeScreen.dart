@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage>
                           ? AppColor.textColorBlack
                           : AppColor.textColorWhite,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
@@ -239,6 +239,7 @@ class _HomePageState extends State<HomePage>
                               : AppColor.textColorBlack,
                         ),
                       ),
+                      
                     ),
                   ),
                   CustomTextwiget(

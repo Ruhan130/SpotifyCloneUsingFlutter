@@ -3,6 +3,8 @@ class AppDimensions{
   static const double fontsize15 = 15 ; 
   static const double fontsize26 = 26 ; 
   static const double fontsize12 = 12 ; 
+  static const double fontsize10 = 10 ; 
+  static const double fontsize20 = 20 ; 
   static const double fontsize25 = 25 ; 
   static const double matrixTranslate10 = 10 ; 
   static const double matrixTranslate0 = 0 ; 
@@ -16,6 +18,12 @@ class AppDimensions{
   
   
   static const double containerHeightInHome = 40 ;
+  static const double containerHeight30 = 30 ;
+  static const double containerWidget30 = 30 ;
+
+
+  static const double containerHeight35 = 35 ;
+  static const double containerWidget35 = 35 ;
   static const double containerHeight200 = 200 ;
   static const double containerHeight380 = 380 ;
   static const double containerWidgetInHome = 40 ;
@@ -42,8 +50,10 @@ class AppDimensions{
   static const double sizeHeight160 = 160 ;
   static const double sizeHeight180 = 180 ;
   
+  static const double sizeWidget15 = 15 ;
   
   static const double borderR30 = 30 ;
+  static const double borderR220 = 200 ;
   
   static const double imgHeight140 = 140 ;
 
