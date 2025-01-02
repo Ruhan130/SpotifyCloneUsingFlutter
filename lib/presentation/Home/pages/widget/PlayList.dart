@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
@@ -19,27 +18,13 @@ class Playlist extends StatefulWidget {
 }
 
 class _PlaylistState extends State<Playlist> {
-  bool iconChange = false;
-  final audioPlayer = AudioPlayer();
-  SongEntity? currentSong; // To track the current song
-  bool isPlaying = false;
+  late List<bool> isMusicList;
 
-  void playSong(SongEntity song) async {
-    if (currentSong == song && isPlaying) {
-      // Pause the current song
-      await audioPlayer.pause();
-      setState(() {
-        isPlaying = false;
-      });
-    } else {
-      // Play the selected song
-      await audioPlayer.setAsset(song.audio);
-      await audioPlayer.play();
-      setState(() {
-        currentSong = song;
-        isPlaying = true;
-      });
-    }
+  @override
+  void initState() {
+    super.initState();
+    // Initialize list with 'false' for each song
+    isMusicList = List<bool>.filled(songList.length, false);
   }
 
   @override
@@ -47,8 +32,9 @@ class _PlaylistState extends State<Playlist> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.padingSemetric15,
-            vertical: AppDimensions.padingSemetric20),
+          horizontal: AppDimensions.padingSemetric15,
+          vertical: AppDimensions.padingSemetric20,
+        ),
         child: Column(
           children: [
             Row(
@@ -67,7 +53,7 @@ class _PlaylistState extends State<Playlist> {
             const SizedBox(
               height: 10,
             ),
-            _playList(songList)
+            _playList(songList),
           ],
         ),
       ),
@@ -87,24 +73,28 @@ class _PlaylistState extends State<Playlist> {
               builder: (context, audioProvider, child) {
                 return GestureDetector(
                   onTap: () {
+                    setState(() {
+                      isMusicList[index] = !isMusicList[index];
+                    });
+
                     if (!audioProvider.isPlaying ||
                         audioProvider.currentSong != song) {
-                      audioProvider
-                          .play(song); // Song ko play karo agar nahi chal raha.
+                      audioProvider.play(song);
                     }
 
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
-                    ).whenComplete(
-                      () {
-                        audioProvider.stop();
-                        
-                      },
-                    );
+                    ).whenComplete(() {
+                      audioProvider.stop();
+                      setState(() {
+                        isMusicList[index] = !isMusicList[index];
+                      });
+                    });
                   },
-                  child:
-                      const Icon(Icons.play_arrow), // UI ko aise hi chhod do.
+                  child: Icon(
+                    isMusicList[index] ? Icons.pause : Icons.play_arrow,
+                  ),
                 );
               },
             ),
