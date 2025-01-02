@@ -18,23 +18,16 @@ class Playlist extends StatefulWidget {
 }
 
 class _PlaylistState extends State<Playlist> {
-  late List<bool> isMusicList;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize list with 'false' for each song
-    isMusicList = List<bool>.filled(songList.length, false);
-  }
+  bool isMusic = false;
+  final Map<int, bool> isPlayingMap = {};
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.padingSemetric15,
-          vertical: AppDimensions.padingSemetric20,
-        ),
+            horizontal: AppDimensions.padingSemetric15,
+            vertical: AppDimensions.padingSemetric20),
         child: Column(
           children: [
             Row(
@@ -53,28 +46,34 @@ class _PlaylistState extends State<Playlist> {
             const SizedBox(
               height: 10,
             ),
-            _playList(songList),
+            _playList(songList)
           ],
         ),
       ),
     );
   }
 
-  Widget _playList(List<SongEntity> songs) {
+   Widget _playList(List<SongEntity> songs) {
     return ListView.separated(
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final song = songs[index];
+        final isPlaying = isPlayingMap[index] ?? false; // Default to false if not set
+
         return Row(
           children: [
             Consumer<AudioPlayerProvider>(
               builder: (context, audioProvider, child) {
-                return GestureDetector(
-                  onTap: () {
+                return IconButton(
+                  onPressed: () {
+                    // Update state for the clicked song
                     setState(() {
-                      isMusicList[index] = !isMusicList[index];
+                      for (var key in isPlayingMap.keys) {
+                        isPlayingMap[key] = false; // Reset all to false
+                      }
+                      isPlayingMap[index] = true; // Set current to true
                     });
 
                     if (!audioProvider.isPlaying ||
@@ -86,14 +85,15 @@ class _PlaylistState extends State<Playlist> {
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
                     ).whenComplete(() {
-                      audioProvider.stop();
+                      // Reset play status on dismiss
                       setState(() {
-                        isMusicList[index] = !isMusicList[index];
+                        isPlayingMap[index] = false;
                       });
+                      audioProvider.stop();
                     });
                   },
-                  child: Icon(
-                    isMusicList[index] ? Icons.pause : Icons.play_arrow,
+                  icon: Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
                 );
               },
