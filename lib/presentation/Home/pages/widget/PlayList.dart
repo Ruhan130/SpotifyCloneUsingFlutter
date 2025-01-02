@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:project/common/helper/isDark.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
 import 'package:project/core/config/assets/app_dimensions.dart';
@@ -19,28 +18,8 @@ class Playlist extends StatefulWidget {
 }
 
 class _PlaylistState extends State<Playlist> {
-  bool iconChange = false;
-  final audioPlayer = AudioPlayer();
-  SongEntity? currentSong; // To track the current song
-  bool isPlaying = false;
-
-  void playSong(SongEntity song) async {
-    if (currentSong == song && isPlaying) {
-      // Pause the current song
-      await audioPlayer.pause();
-      setState(() {
-        isPlaying = false;
-      });
-    } else {
-      // Play the selected song
-      await audioPlayer.setAsset(song.audio);
-      await audioPlayer.play();
-      setState(() {
-        currentSong = song;
-        isPlaying = true;
-      });
-    }
-  }
+  bool isMusic = false;
+  final Map<int, bool> isPlayingMap = {};
 
   @override
   Widget build(BuildContext context) {
@@ -74,37 +53,48 @@ class _PlaylistState extends State<Playlist> {
     );
   }
 
-  Widget _playList(List<SongEntity> songs) {
+   Widget _playList(List<SongEntity> songs) {
     return ListView.separated(
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final song = songs[index];
+        final isPlaying = isPlayingMap[index] ?? false; // Default to false if not set
+
         return Row(
           children: [
             Consumer<AudioPlayerProvider>(
               builder: (context, audioProvider, child) {
-                return GestureDetector(
-                  onTap: () {
+                return IconButton(
+                  onPressed: () {
+                    // Update state for the clicked song
+                    setState(() {
+                      for (var key in isPlayingMap.keys) {
+                        isPlayingMap[key] = false; // Reset all to false
+                      }
+                      isPlayingMap[index] = true; // Set current to true
+                    });
+
                     if (!audioProvider.isPlaying ||
                         audioProvider.currentSong != song) {
-                      audioProvider
-                          .play(song); // Song ko play karo agar nahi chal raha.
+                      audioProvider.play(song);
                     }
 
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => MiniMusicPlayer(songEntity: song),
-                    ).whenComplete(
-                      () {
-                        audioProvider.stop();
-                        
-                      },
-                    );
+                    ).whenComplete(() {
+                      // Reset play status on dismiss
+                      setState(() {
+                        isPlayingMap[index] = false;
+                      });
+                      audioProvider.stop();
+                    });
                   },
-                  child:
-                      const Icon(Icons.play_arrow), // UI ko aise hi chhod do.
+                  icon: Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                  ),
                 );
               },
             ),
