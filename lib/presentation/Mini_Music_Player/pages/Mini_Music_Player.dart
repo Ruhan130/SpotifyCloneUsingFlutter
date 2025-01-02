@@ -16,8 +16,10 @@ class MiniMusicPlayer extends StatefulWidget {
 }
 
 class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
+  bool isMusic = false ;
   @override
   Widget build(BuildContext context) {
+
     return Consumer<AudioPlayerProvider>(
       builder: (context, audioProvider, child) {
         return SizedBox(
@@ -78,10 +80,16 @@ class _MiniMusicPlayerState extends State<MiniMusicPlayer> {
           builder: (context, isMiniPlaying, child) {
             return IconButton(
               icon: Icon(
-                isMiniPlaying ? Icons.play_arrow : Icons.pause,
+                isMusic ? Icons.play_arrow : Icons.pause,
               ),
-              onPressed: () =>
-                  context.read<AudioPlayerProvider>().handlePlayPause(),
+              onPressed: (){
+                setState(() {
+                  isMusic =! isMusic; 
+                });
+                context.read<AudioPlayerProvider>().handlePlayPause();
+              }
+                  
+                
             );
           },
         ),
