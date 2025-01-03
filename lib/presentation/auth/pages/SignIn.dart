@@ -24,7 +24,7 @@ class SignIn extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: SizedBox(height: 60, child: _signUpText(context)),
       appBar: BasicAppbar(
-        isHide: false,
+        isHide: true,
         tittle: SvgPicture.asset(
           AppVectors.logo,
           height: 40,
@@ -51,9 +51,9 @@ class SignIn extends StatelessWidget {
               ),
               CustomElevatedButton(
                 tittle: 'Sign In',
-                onpressed: () async {
+                onpressed: (){
                   prefService.createCache(_password.text).whenComplete(
-                    () async {
+                    ()async {
                       var result = await sl<SigninUseCase>().call(
                         Params: SigninUserReq(
                             email: _email.text.toString(),

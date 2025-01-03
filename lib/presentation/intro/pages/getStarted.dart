@@ -26,17 +26,20 @@ class _GetStartedState extends State<GetStarted> {
     prefService.readCache("password").then(
       (value) {
         if (value != null) {
-          return Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ));
+          return Navigator.pushAndRemoveUntil(
+            // ignore: use_build_context_synchronously
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+            (route) => false,
+          );
         } else {
-          return Navigator.push(
-              context,
+          return Navigator.pushAndRemoveUntil(
+              context, 
               MaterialPageRoute(
                 builder: (context) => SignIn(),
-              ));
+              ), (route) => false, );
         }
       },
     );

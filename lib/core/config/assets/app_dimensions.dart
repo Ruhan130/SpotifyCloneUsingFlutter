@@ -10,7 +10,7 @@ class AppDimensions{
   static const double matrixTranslate0 = 0 ; 
 
   static const double getStartedDescriptionText = 12 ; 
-  static const int splashDelay = 2 ;
+  static const int splashDelay = 3 ;
   static const double homeSizeForTabHomeScreen = 12 ;
   
   static const double heightLogoInHome = 40 ;

@@ -1,15 +1,17 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PrefService{
-  Future createCache(String password) async{
+class PrefService {
+  Future createCache(String password) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var cache = preferences.setString("password", password);
-    return cache;
+    preferences.setString("password", password);
   }
+
   Future readCache(String password) async {
     SharedPreferences prefernece = await SharedPreferences.getInstance();
-    prefernece.getString("password");
+    var cache = prefernece.getString("password");
+    return cache;
   }
+
   Future removeChache(String password) async {
     SharedPreferences preference = await SharedPreferences.getInstance();
     preference.remove("password");
