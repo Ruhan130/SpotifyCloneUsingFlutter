@@ -10,16 +10,19 @@ import 'package:project/domain/usecases/auth/signin.dart';
 import 'package:project/presentation/auth/pages/signup.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/service_locator.dart';
+import 'package:project/services/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class SignIn extends StatelessWidget {
   SignIn({super.key});
+  final PrefService prefService = PrefService();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SizedBox(height: 60,child: _signUpText(context)),
+      bottomNavigationBar: SizedBox(height: 60, child: _signUpText(context)),
       appBar: BasicAppbar(
         isHide: false,
         tittle: SvgPicture.asset(
@@ -49,28 +52,32 @@ class SignIn extends StatelessWidget {
               CustomElevatedButton(
                 tittle: 'Sign In',
                 onpressed: () async {
-                  var result = await sl<SigninUseCase>().call(
-                    Params: SigninUserReq(
-                        email: _email.text.toString(),
-                        password: _password.text.toString()),
-                  );
-                  
-                  result.fold(
-                    (l) {
-                      var snackbar = SnackBar(
-                        content: Text(l),
-                        behavior: SnackBarBehavior.floating,
+                  prefService.createCache(_password.text).whenComplete(
+                    () async {
+                      var result = await sl<SigninUseCase>().call(
+                        Params: SigninUserReq(
+                            email: _email.text.toString(),
+                            password: _password.text.toString()),
                       );
-                      print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk$l");
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    },
-                    (r) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  const HomePage(),
-                          ),
-                          (route) => false);
+
+                      result.fold(
+                        (l) {
+                          var snackbar = SnackBar(
+                            content: Text(l),
+                            behavior: SnackBarBehavior.floating,
+                          );
+                          print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk$l");
+                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                        },
+                        (r) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                              (route) => false);
+                        },
+                      );
                     },
                   );
                 },
