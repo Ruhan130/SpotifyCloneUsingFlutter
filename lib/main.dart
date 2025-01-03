@@ -9,10 +9,13 @@ import 'package:project/firebase_options.dart';
 import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider.dart';
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/Mini_Music_Player/provider/MiniMusicProvider.dart';
+import 'package:project/presentation/auth/pages/SignIn.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
+import 'package:project/presentation/intro/pages/getStarted.dart';
 import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +25,16 @@ Future<void> main() async {
         ? HydratedStorage.webStorageDirectory
         : await getApplicationDocumentsDirectory(),
   );
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDependency();
-  runApp(const MyApp());
+  runApp(MyApp(isFirstTime: isFirstTime));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   final bool isFirstTime;
+  const MyApp({required this.isFirstTime});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +57,11 @@ class MyApp extends StatelessWidget {
           darkTheme: Apptheme.darkTheme,
           themeMode: mode,
           debugShowCheckedModeBanner: false,
-          home: SplashPage(),
+           home: SplashPage(isFirstTime: isFirstTime),
+      routes: {
+        '/getStarted': (context) => const GetStarted(),
+        '/signIn': (context) =>  SignIn(),
+      },
         ),
       ),
     );

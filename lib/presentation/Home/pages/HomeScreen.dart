@@ -11,7 +11,6 @@ import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
-// import 'package:project/presentation/profile/profile.dart';
 import 'package:project/presentation/song-player/song_player.dart';
 import 'package:project/services/shared_preferences.dart';
 
@@ -23,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+      with SingleTickerProviderStateMixin {
       final PrefService prefService = PrefService();
   // late TabController _tabController;
 

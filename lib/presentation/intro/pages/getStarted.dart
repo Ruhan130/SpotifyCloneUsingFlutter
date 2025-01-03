@@ -10,6 +10,7 @@ import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
 import 'package:project/presentation/chooseModePage/pages/choseModePage.dart';
 import 'package:project/services/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -22,30 +23,6 @@ class _GetStartedState extends State<GetStarted> {
   final PrefService prefService = PrefService();
 
   @override
-  void initState() {
-    prefService.readCache("password").then(
-      (value) {
-        if (value != null) {
-          return Navigator.pushAndRemoveUntil(
-            // ignore: use_build_context_synchronously
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(),
-            ),
-            (route) => false,
-          );
-        } else {
-          return Navigator.pushAndRemoveUntil(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => SignIn(),
-              ), (route) => false, );
-        }
-      },
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,11 +77,20 @@ class _GetStartedState extends State<GetStarted> {
                   tittle: 'Get Started',
                   onpressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ChoseModePage(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChoseModePage(),
+                      ),
+                    );
                   },
+                  // onpressed: () async {
+                  //   SharedPreferences prefs =
+                  //       await SharedPreferences.getInstance();
+                  //   await prefs.setBool(
+                  //       'isFirstTime', false); // Mark as not first-time
+
+                  //   Navigator.pushReplacementNamed(context, '/signIn');
+                  // },
                   textColor: Colors.white,
                 )
               ],

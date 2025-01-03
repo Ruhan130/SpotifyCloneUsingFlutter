@@ -16,4 +16,14 @@ class PrefService {
     SharedPreferences preference = await SharedPreferences.getInstance();
     preference.remove("password");
   }
+
+  //  Future<void> setOnBoardHide(int initScreen) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   await preferences.setInt('initScreen', initScreen);
+  // }
+
+  // Future<int?> getOnBoardHide() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   return preferences.getInt('initScreen');
+  // }
 }
