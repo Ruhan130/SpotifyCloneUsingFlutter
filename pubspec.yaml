@@ -46,6 +46,7 @@ dependencies:
   dartz:
   http: ^1.2.2
   just_audio: 
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:

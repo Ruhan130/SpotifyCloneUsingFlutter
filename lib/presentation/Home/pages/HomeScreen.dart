@@ -11,8 +11,8 @@ import 'package:project/presentation/Home/model/new_songsection.dart';
 import 'package:project/presentation/Home/pages/widget/HometoCard.dart';
 import 'package:project/presentation/Home/pages/widget/PlayList.dart';
 import 'package:project/presentation/auth/pages/SignIn.dart';
-// import 'package:project/presentation/profile/profile.dart';
 import 'package:project/presentation/song-player/song_player.dart';
+import 'package:project/services/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +22,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+      with SingleTickerProviderStateMixin {
+      final PrefService prefService = PrefService();
   // late TabController _tabController;
 
   @override
@@ -43,76 +44,78 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       drawer: Drawer(
-        shape: LinearBorder(),
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
-            child: ListTile(
-              leading: Icon(
-                Icons.favorite_outline,
-                color: context.isDarkMode
-                    ? AppColor.textColorBlack
-                    : AppColor.textColorWhite,
-              ),
-              title: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddToFavouritre(),
-                    ),
-                  );
-                },
-                child: CustomTextwiget(
-                  text: 'FAVOURITE',
+        shape: const LinearBorder(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.favorite_outline,
                   color: context.isDarkMode
                       ? AppColor.textColorBlack
                       : AppColor.textColorWhite,
-                  textFontsize: AppDimensions.fontsize15,
+                ),
+                title: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddToFavouritre(),
+                      ),
+                    );
+                  },
+                  child: CustomTextwiget(
+                    text: 'FAVOURITE',
+                    color: context.isDarkMode
+                        ? AppColor.textColorBlack
+                        : AppColor.textColorWhite,
+                    textFontsize: AppDimensions.fontsize15,
+                  ),
                 ),
               ),
             ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 30),
-            child: Center(
-              child: InkWell(
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CustomTextwiget(
-                      text: 'LOGOUT',
-                      textFontsize: AppDimensions.fontsize15,
-                      color: context.isDarkMode
-                          ? AppColor.textColorBlack
-                          : AppColor.textColorWhite,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignIn()),
-                          (route) => false,
-                        );
-                      },
-                      icon: Icon(
-                        Icons.logout_outlined,
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 30),
+              child: Center(
+                child: InkWell(
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CustomTextwiget(
+                        text: 'LOGOUT',
+                        textFontsize: AppDimensions.fontsize15,
                         color: context.isDarkMode
                             ? AppColor.textColorBlack
                             : AppColor.textColorWhite,
                       ),
-                    ),
-                  ],
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () async {
+                         await prefService.removeChache('password');
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                            (route) => false,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.logout_outlined,
+                          color: context.isDarkMode
+                              ? AppColor.textColorBlack
+                              : AppColor.textColorWhite,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
-      )),
+            )
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +133,7 @@ class _HomePageState extends State<HomePage>
               height: 250,
               child: _NewRow(songList),
             ),
-            Playlist(),
+            const Playlist(),
           ],
         ),
       ),
@@ -239,7 +242,6 @@ class _HomePageState extends State<HomePage>
                               : AppColor.textColorBlack,
                         ),
                       ),
-                      
                     ),
                   ),
                   CustomTextwiget(
