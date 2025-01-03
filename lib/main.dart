@@ -10,6 +10,7 @@ import 'package:project/presentation/Add_to_favourite/provider/FavourtieProvider
 import 'package:project/presentation/Home/pages/HomeScreen.dart';
 import 'package:project/presentation/Mini_Music_Player/provider/MiniMusicProvider.dart';
 import 'package:project/presentation/chooseModePage/bloc/theme_cubit.dart';
+import 'package:project/presentation/splash/pages/splash.dart';
 import 'package:project/service_locator.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
           darkTheme: Apptheme.darkTheme,
           themeMode: mode,
           debugShowCheckedModeBanner: false,
-          home: HomePage(),
+          home: SplashPage(),
         ),
       ),
     );
