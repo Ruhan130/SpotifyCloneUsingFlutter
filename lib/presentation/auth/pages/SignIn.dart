@@ -139,11 +139,11 @@ class SignIn extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SignUp(),
-                ));
+                ), (route) => false,)  ;
           },
           child: CustomTextwiget(
             text: 'Register Now',

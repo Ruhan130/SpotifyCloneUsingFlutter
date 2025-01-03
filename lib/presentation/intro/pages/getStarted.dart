@@ -6,11 +6,8 @@ import 'package:project/core/config/assets/app_image.dart';
 import 'package:project/core/config/assets/app_vectors.dart';
 import 'package:project/core/config/theme/app_color.dart';
 import 'package:project/common/widgets/customTextWiget.dart';
-import 'package:project/presentation/Home/pages/HomeScreen.dart';
-import 'package:project/presentation/auth/pages/SignIn.dart';
 import 'package:project/presentation/chooseModePage/pages/choseModePage.dart';
 import 'package:project/services/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
